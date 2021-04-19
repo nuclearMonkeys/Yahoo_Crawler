@@ -15,23 +15,23 @@ from itemadapter import is_item, ItemAdapter
 class SeleniumDownloaderMiddleware(object):
     # Uses Selenium to scroll down a Yahoo Answers page to get questions (INCOMPLETE)
     def __init__(self):
-        self.driver = webdriver.PhantomJS()
+        self.driver = webdriver.Chrome("C:\\Users\\ROX Tigers DJ\\Documents\\Side Projects\\Yahoo Crawler\\Chrome Driver\\chromedriver.exe")
 
     def process_request(self, request, spider):
         self.driver.get(request.url)
         questions = self.driver.find_elements_by_css_selector("li.CategoryStreamsList__streamItem___2Jgqs CategoryStreamsList__discoverStreamItem___G2MIg")
-        while len(questions) < 400:
+        while len(questions) < 120: # Doesn't go past 60 for some reason, not scrolling
             try:
                 self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                WebDriverWait() #NOT DONE
+                WebDriverWait(self.driver, 10).until(lambda driver: new_questions(driver, len(questions)))
                 questions = self.driver.find_elements_by_css_selector("li.CategoryStreamsList__streamItem___2Jgqs CategoryStreamsList__discoverStreamItem___G2MIg")
             except TimeoutException:
                 break
         body = self.driver.page_source
         return HtmlResponse(self.driver.current_url, body = body, encoding = 'utf-8', request = request)
 
-def is_finished(driver, length):
-    return len(self.driver.find_elements_by_css_selector("li.CategoryStreamsList__streamItem___2Jgqs CategoryStreamsList__discoverStreamItem___G2MIg")) > length
+def new_questions(driver, length):
+    return len(driver.find_elements_by_css_selector("li.CategoryStreamsList__streamItem___2Jgqs CategoryStreamsList__discoverStreamItem___G2MIg")) > length
 
 class YahoocrawlerSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,

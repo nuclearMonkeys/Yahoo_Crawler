@@ -52,7 +52,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'YahooCrawler.middlewares.YahoocrawlerDownloaderMiddleware': None,
-    'YahooCrawler.middlewares.SeleniumDownloaderMiddleware': 543,
+    'YahooCrawler.middlewares.SeleniumDownloaderMiddleware': 543, #543
 }
 
 # Enable or disable extensions
