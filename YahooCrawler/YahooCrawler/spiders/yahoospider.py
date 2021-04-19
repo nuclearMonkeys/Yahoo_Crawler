@@ -27,9 +27,21 @@ class YahooSpider(scrapy.Spider):
 
             yield frontitem
 
-    def parse_categories(self):
+        for category in response.css('li.CategoryNav__item___11rAo'):
+            next_page = urljoin('https://answers.yahoo.com', category.css('a').attrib['href'])
+            yield response.follow(next_page, callback = self.parse_categories)
+
+    def parse_categories(self, response):
         # For parsing through the individual categories, to retrieve more questions
-        pass
+        item = YahoocrawlerItem()
+        for question in response.css('div.QuestionCard__questionCard___18EIQ'):
+            item['title'] = question.css('a.QuestionCard__title___1DKC-::text').get()
+            item['numofanswers'] = question.css('span.QuestionInfo__answersCount___1gokz::text').get()
+            item['category'] = question.css('a.QuestionInfo__category___2kFc4::text').get()
+            quest_link = urljoin('https://answers.yahoo.com', question.css('a.QuestionCard__title___1DKC-').attrib['href'])
+            item['link'] = quest_link
+
+            yield item
 
     def parse_answers(self):
         # For parsing through a question's answers
