@@ -15,12 +15,12 @@ from itemadapter import is_item, ItemAdapter
 class SeleniumDownloaderMiddleware(object):
     # Uses Selenium to scroll down a Yahoo Answers page to get questions (INCOMPLETE)
     def __init__(self):
-        self.driver = webdriver.Chrome("C:\\Users\\ROX Tigers DJ\\Documents\\Side Projects\\Yahoo Crawler\\Chrome Driver\\chromedriver.exe")
+        self.driver = webdriver.Chrome(executable_path = "C:\\Users\\ROX Tigers DJ\\Documents\\Side Projects\\Yahoo Crawler\\Chrome Driver\\chromedriver.exe")
 
     def process_request(self, request, spider):
         self.driver.get(request.url)
         questions = self.driver.find_elements_by_css_selector("li.CategoryStreamsList__streamItem___2Jgqs CategoryStreamsList__discoverStreamItem___G2MIg")
-        while len(questions) < 120: # Doesn't go past 60 for some reason, not scrolling
+        while len(questions) < 80: # Doesn't go past 60 for some reason, not scrolling
             try:
                 self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 WebDriverWait(self.driver, 10).until(lambda driver: new_questions(driver, len(questions)))
