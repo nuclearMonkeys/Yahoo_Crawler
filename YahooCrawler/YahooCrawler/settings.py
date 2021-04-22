@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = 'YahooCrawler.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'YahooCrawler (+http://www.yourdomain.com)'
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -52,7 +52,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'YahooCrawler.middlewares.YahoocrawlerDownloaderMiddleware': None,
-    'YahooCrawler.middlewares.SeleniumDownloaderMiddleware': None, #543
+    'YahooCrawler.middlewares.SeleniumDownloaderMiddleware': None, #543, commented out for now
 }
 
 # Enable or disable extensions
