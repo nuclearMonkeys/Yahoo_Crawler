@@ -3,11 +3,15 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import time
 from scrapy import signals
 from selenium import webdriver
 from scrapy.http import HtmlResponse
-from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+#from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
@@ -19,19 +23,21 @@ class SeleniumDownloaderMiddleware(object):
 
     def process_request(self, request, spider):
         self.driver.get(request.url)
-        questions = self.driver.find_elements_by_css_selector("li.CategoryStreamsList__streamItem___2Jgqs CategoryStreamsList__discoverStreamItem___G2MIg")
-        while len(questions) < 80: # Doesn't go past 60 for some reason, not scrolling
-            try:
-                self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                WebDriverWait(self.driver, 10).until(lambda driver: new_questions(driver, len(questions)))
-                questions = self.driver.find_elements_by_css_selector("li.CategoryStreamsList__streamItem___2Jgqs CategoryStreamsList__discoverStreamItem___G2MIg")
-            except TimeoutException:
-                break
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/div[3]/button[2]"))).click()
+        #self.driver.find_element_by_css_selector('button.Buttons__primaryBtn___3eT1h Buttons__roundBtnBase___Q8yuU Buttons__btnBase___2Z659 Modal__alertActionBtn___1TrvT').click()
+        last_height = self.driver.execute_script("return document.body.scrollHeight")
+        new_height = None
+        reached_page_end = False
+        while not reached_page_end: 
+            self.driver.find_element_by_xpath('//body').send_keys(Keys.END)
+            time.sleep(3)
+            new_height = self.driver.execute_script("return document.body.scrollHeight")
+            if last_height == new_height:
+                reached_page_end = True
+            else:
+                last_height = new_height
         body = self.driver.page_source
         return HtmlResponse(self.driver.current_url, body = body, encoding = 'utf-8', request = request)
-
-def new_questions(driver, length):
-    return len(driver.find_elements_by_css_selector("li.CategoryStreamsList__streamItem___2Jgqs CategoryStreamsList__discoverStreamItem___G2MIg")) > length
 
 class YahoocrawlerSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
