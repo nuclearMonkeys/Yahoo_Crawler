@@ -14,4 +14,9 @@ class YahoocrawlerItem(scrapy.Item):
     numofanswers = scrapy.Field()
     category = scrapy.Field()
     link = scrapy.Field()
+    upvotes = scrapy.Field()
+    user = scrapy.Field()
+    userpage = scrapy.Field()
+    questiontext = scrapy.Field()
+    answers = scrapy.Field()
     
