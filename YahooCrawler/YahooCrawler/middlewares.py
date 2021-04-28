@@ -8,7 +8,8 @@ from scrapy import signals
 from selenium import webdriver
 from scrapy.http import HtmlResponse
 from selenium.webdriver.common.by import By
-#from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
@@ -20,15 +21,20 @@ class SeleniumDownloaderMiddleware(object):
     # Uses Selenium to scroll down a Yahoo Answers page to get questions (INCOMPLETE)
     def __init__(self):
         self.driver = webdriver.Chrome(executable_path = "C:\\Users\\ROX Tigers DJ\\Documents\\Side Projects\\Yahoo Crawler\\Chrome Driver\\chromedriver.exe")
+        self.page = "https://answers.yahoo.com/"
 
     def process_request(self, request, spider):
         self.driver.get(request.url)
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/div[3]/button[2]"))).click()
+        if request.url == self.page:
+            WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/div[3]/button[2]"))).click()
         #self.driver.find_element_by_css_selector('button.Buttons__primaryBtn___3eT1h Buttons__roundBtnBase___Q8yuU Buttons__btnBase___2Z659 Modal__alertActionBtn___1TrvT').click()
         last_height = self.driver.execute_script("return document.body.scrollHeight")
         new_height = None
         reached_page_end = False
         while not reached_page_end: 
+            while check_exists_by_xpath('/html/body/div/div[1]/div/div/main/div/div[3]/div[3]/div[2]/ul/li[11]/div/a', self.driver):
+                self.driver.find_element_by_xpath('/html/body/div/div[1]/div/div/main/div/div[3]/div[3]/div[2]/ul/li[11]/div/a').click()
+                time.sleep(3)
             self.driver.find_element_by_xpath('//body').send_keys(Keys.END)
             time.sleep(3)
             new_height = self.driver.execute_script("return document.body.scrollHeight")
@@ -38,6 +44,13 @@ class SeleniumDownloaderMiddleware(object):
                 last_height = new_height
         body = self.driver.page_source
         return HtmlResponse(self.driver.current_url, body = body, encoding = 'utf-8', request = request)
+
+def check_exists_by_xpath(xpath, driver):
+    try:
+        driver.find_element_by_xpath(xpath)
+    except NoSuchElementException:
+        return False
+    return True
 
 class YahoocrawlerSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
