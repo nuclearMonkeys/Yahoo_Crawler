@@ -8,15 +8,26 @@ import scrapy
 #from itemloaders.processors import TakeFirst, MapCompose
 #from w3lib.html import remove_tags
 
-class YahoocrawlerItem(scrapy.Item):
+class QuestionItem(scrapy.Item):
     # define the fields for your item here like:
+    q_id = scrapy.Field()
     title = scrapy.Field()
     numofanswers = scrapy.Field()
     category = scrapy.Field()
     link = scrapy.Field()
     upvotes = scrapy.Field()
     user = scrapy.Field()
+    u_id = scrapy.Field()
     userpage = scrapy.Field()
     questiontext = scrapy.Field()
-    answers = scrapy.Field()
+    
+class AnswerItem(scrapy.Item):
+    a_id = scrapy.Field()
+    answer = scrapy.Field()
+    user = scrapy.Field()
+    u_id = scrapy.Field()
+    userpage = scrapy.Field()
+    likes = scrapy.Field()
+    dislikes = scrapy.Field()
+    q_id = scrapy.Field()
     
