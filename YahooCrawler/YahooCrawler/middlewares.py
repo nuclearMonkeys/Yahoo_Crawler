@@ -28,6 +28,8 @@ class SeleniumDownloaderMiddleware(object):
         if request.url == self.page:
             WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/div[3]/button[2]"))).click()
         #self.driver.find_element_by_css_selector('button.Buttons__primaryBtn___3eT1h Buttons__roundBtnBase___Q8yuU Buttons__btnBase___2Z659 Modal__alertActionBtn___1TrvT').click()
+        self.driver.refresh()
+        time.sleep(2)
         last_height = self.driver.execute_script("return document.body.scrollHeight")
         new_height = None
         reached_page_end = False
