@@ -20,11 +20,12 @@ class YahooSpider(scrapy.Spider):
         frontanswers = AnswerItem()
         for question in response.css('li.CategoryStreamsList__streamItem___2Jgqs.CategoryStreamsList__discoverStreamItem___G2MIg'):
             qid_part = question.css('a.QuestionCard__title___1DKC-').attrib['href']
-            current_link = urljoin('https://answers.yahoo.com', qid_part)
-            self.visited_questions.add(qid_part[20:])
-            params = [question.css('a.QuestionCard__title___1DKC-::text').get(), question.css('div::text').get(), current_link]
-            # Title, upvotes, links
-            yield response.follow(current_link, callback = self.parse_answers, meta = {'questitem': frontitem, 'ansitem': frontanswers, 'params': params})
+            if qid_part not in self.visited_questions:
+                current_link = urljoin('https://answers.yahoo.com', qid_part)
+                self.visited_questions.add(qid_part[20:])
+                params = [question.css('a.QuestionCard__title___1DKC-::text').get(), question.css('div::text').get(), current_link]
+                # Title, upvotes, links
+                yield response.follow(current_link, callback = self.parse_answers, meta = {'questitem': frontitem, 'ansitem': frontanswers, 'params': params})
 
         for category in response.css('li.CategoryNav__item___11rAo'):
             next_page = urljoin('https://answers.yahoo.com', category.css('a').attrib['href'])
@@ -36,11 +37,12 @@ class YahooSpider(scrapy.Spider):
         ansitem = response.meta.get('ansitem')
         for question in response.css('li.CategoryStreamsList__streamItem___2Jgqs.CategoryStreamsList__discoverStreamItem___G2MIg'):
             qid_part = question.css('a.QuestionCard__title___1DKC-').attrib['href']
-            current_link = urljoin('https://answers.yahoo.com', qid_part)
-            self.visited_questions.add(qid_part[20:])
-            params = [question.css('a.QuestionCard__title___1DKC-::text').get(), question.css('div::text').get(), current_link]
-            # Title, upvotes, links
-            yield response.follow(current_link, callback = self.parse_answers, meta = {'questitem': questitem, 'ansitem': ansitem, 'params': params})
+            if qid_part not in self.visited_questions:
+                current_link = urljoin('https://answers.yahoo.com', qid_part)
+                self.visited_questions.add(qid_part[20:])
+                params = [question.css('a.QuestionCard__title___1DKC-::text').get(), question.css('div::text').get(), current_link]
+                # Title, upvotes, links
+                yield response.follow(current_link, callback = self.parse_answers, meta = {'questitem': questitem, 'ansitem': ansitem, 'params': params})
 
         answertab = urljoin('https://answers.yahoo.com', response.css('a.Tabs__tabTitle___2atJH::attr(href)').getall()[1])
         yield response.follow(answertab, callback = self.parse_answertab, meta = {'questitem': questitem, 'ansitem': ansitem})
@@ -55,11 +57,12 @@ class YahooSpider(scrapy.Spider):
         ansitem = response.meta.get('ansitem')
         for question in response.css('li.CategoryStreamsList__streamItem___2Jgqs.CategoryStreamsList__discoverStreamItem___G2MIg'):
             qid_part = question.css('a.QuestionCard__title___1DKC-').attrib['href']
-            current_link = urljoin('https://answers.yahoo.com', qid_part)
-            self.visited_questions.add(qid_part[20:])
-            params = [question.css('a.QuestionCard__title___1DKC-::text').get(), question.css('div::text').get(), current_link]
-            # Title, upvotes, links
-            yield response.follow(current_link, callback = self.parse_answers, meta = {'questitem': questitem, 'ansitem': ansitem, 'params': params})
+            if qid_part not in self.visited_questions:
+                current_link = urljoin('https://answers.yahoo.com', qid_part)
+                self.visited_questions.add(qid_part[20:])
+                params = [question.css('a.QuestionCard__title___1DKC-::text').get(), question.css('div::text').get(), current_link]
+                # Title, upvotes, links
+                yield response.follow(current_link, callback = self.parse_answers, meta = {'questitem': questitem, 'ansitem': ansitem, 'params': params})
 
         answertab = urljoin('https://answers.yahoo.com', response.css('a.Tabs__tabTitle___2atJH::attr(href)').getall()[1])
         yield response.follow(answertab, callback = self.parse_answertab, meta = {'questitem': questitem, 'ansitem': ansitem})
@@ -70,14 +73,17 @@ class YahooSpider(scrapy.Spider):
         ansitem = response.meta.get('ansitem')
         for question in response.css('li.CategoryStreamsList__streamItem___2Jgqs.CategoryStreamsList__discoverStreamItem___G2MIg'):
             qid_part = question.css('a.QuestionCard__title___1DKC-').attrib['href']
-            current_link = urljoin('https://answers.yahoo.com', qid_part)
-            self.visited_questions.add(qid_part[20:])
-            params = [question.css('a.QuestionCard__title___1DKC-::text').get(), question.css('div::text').get(), current_link]
-            # Title, upvotes, links
-            yield response.follow(current_link, callback = self.parse_answers, meta = {'questitem': questitem, 'ansitem': ansitem, 'params': params})
+            if qid_part not in self.visited_questions:
+                current_link = urljoin('https://answers.yahoo.com', qid_part)
+                self.visited_questions.add(qid_part[20:])
+                params = [question.css('a.QuestionCard__title___1DKC-::text').get(), question.css('div::text').get(), current_link]
+                # Title, upvotes, links
+                yield response.follow(current_link, callback = self.parse_answers, meta = {'questitem': questitem, 'ansitem': ansitem, 'params': params})
 
     def parse_users(self, response):
         # For parsing through the questions that an individual user has gone through
+        questitem = response.meta.get('questitem')
+        ansitem = response.meta.get('ansitem')
         for question in response.css('div.QuestionCard__questionCard___18EIQ'):
             qid_part = question.css('a.QuestionCard__title___1DKC-').attrib['href']
             if qid_part not in self.visited_questions:
@@ -133,8 +139,9 @@ class YahooSpider(scrapy.Spider):
             yield ansitem
 
         for newanswer in response.css('div.QuestionListResponsiveWithSide__question___2xzAA'):
-            new_link = urljoin('https://answers.yahoo.com', newanswer.css('a.QuestionListResponsiveWithSide__questionTitle___nNlCE::attr(href)').get())
-            new_qid = newanswer[20:]
+            qid = newanswer.css('a.QuestionListResponsiveWithSide__questionTitle___nNlCE::attr(href)').get()
+            new_link = urljoin('https://answers.yahoo.com', qid)
+            new_qid = qid[20:]
             if new_qid not in self.visited_questions:
                 self.visited_questions.add(new_qid)
                 new_params = [newanswer.css('a.QuestionListResponsiveWithSide__questionTitle___nNlCE::text').get(), None, new_link]
