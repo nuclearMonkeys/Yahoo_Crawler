@@ -34,11 +34,12 @@ def insert_user(connection, u_id, username):
     
     connection.commit()
 
-def insert_question(connection, q_id, title, num_of_answers, category, rating, u_id):
+# def insert_question(connection, q_id, title, num_of_answers, category, rating, u_id):
+def insert_question(connection, q_id, title, num_of_answers, category, rating, u_id, link):
     insert_statement = """
     INSERT INTO questions VALUES\n
     """
-    insert_statement += "({}, {}, {}, {}, {}, {})\n".format(q_id, title, num_of_answers, category, rating, u_id)
+    insert_statement += "({}, {}, {}, {}, {}, {}, {})\n".format(q_id, title, num_of_answers, category, rating, u_id, link)
     execute_query(connection, insert_statement)
 
     connection.commit()
@@ -62,6 +63,11 @@ def read_query(connection, query):
     except Exception as err:
         print(f"Error: '{err}'")
 
+def delete_all(connection):
+    execute_query(connection, "DELETE FROM answers")
+    execute_query(connection, "DELETE FROM questions")
+    execute_query(connection, "DELETE FROM users")
+
 def test():
     print("test,")
 
@@ -70,6 +76,8 @@ if __name__ == '__main__':
     # insert_user(connection, "'HJK235HKJAER'", "'dummy_user_1'")
     # insert_question(connection, "1", "'Do you remember the hippo in our campus?'", "1", "'Psychology'", "10", "'HJK235HKJAER'")
     # insert_answer(connection, "2", "'Hell yeah brother!'", "1", "'HJK235HKJAER'")
-    results = read_query(connection, "SELECT * FROM users WHERE u_id = {}".format("'MPiq2Ovqaa'"))
+    # results = read_query(connection, "SELECT * FROM users WHERE u_id = {}".format("'MPiq2Ovqaa'"))
 
-    print(results)
+    # print(results)
+
+    delete_all(connection)

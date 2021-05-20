@@ -1,37 +1,20 @@
-import re
-import extruct
-from scrapy.spiders import CrawlSpider, Rule
-from w3lib.url import url_query_cleaner
-from scrapy.linkextractors import LinkExtractor
+from contextlib import ExitStack
 
-def process_links(links):
-    for link in links:
-        link.url = url_query_cleaner(link.url)
-        yield link
+filenames = ["test_crawl14.json", "test_crawl16.json", "test_crawl17.json"]
 
-class TestCrawler(CrawlSpider):
-    name = 'test'
-    allowed_domains = ['crawler-test.com']
-    start_urls = ['https://crawler-test.com/']
-    rules = (Rule(LinkExtractor(
-        deny = [
-            re.escape('http://crawler-test.com/redirects/'),
-            re.escape('http://crawler-test.com/infinite/'),
-            re.escape('https://crawler-test.com/redirects/'),
-            re.escape('https://crawler-test.com/infinite/'),
-            ],
-        ), 
-        process_links=process_links,
-        callback='parse_item',
-        follow=True),
-    )
+with ExitStack() as stack:
+    files = [
+        stack.enter_context(open(filename))
+        for filename in filenames
+    ]
 
-    def parse_item(self, response):
-        return {
-            'url': response.url,
-            'metadata': extruct.extract(
-                response.text,
-                response.url,
-                syntaxes=['opengraph', 'json-ld']
-            ),
-        }
+    print(files[0].closed)
+
+    files[0].close()
+    files[1].close()
+
+    print(files[2].closed)
+
+    files[2].close()
+
+    print(files[2].closed)
