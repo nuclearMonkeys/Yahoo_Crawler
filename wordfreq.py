@@ -60,7 +60,6 @@ def tokenizeAndLemmatize(text):
     # Return a list of lemmatized tokens for search engine purposes later.
     # Get a list of all the tokens in the text.
     tokenList = tokenize(text)
-
     # Lemmatize every token in the token list using WordNet and add it to the lemmalist in reverse order,
     # while excluding lemmatized tokens of length 1
     lemmaList = list()
@@ -79,7 +78,7 @@ def check_if_question(entry):
         return False
     return True
 
-def json_reading(crawl_list):
+def json_reading_freq(crawl_list):
     # Reading the json files with the crawl information for the purposes of
     # compiling word frequency for each question and answer.
     for crawl in crawl_test:
@@ -88,10 +87,22 @@ def json_reading(crawl_list):
             for entries in YahooObject:
                 if check_if_question(entries):
                     q_title = entries.get("title")
-                    
+                    token_list = tokenizeAndLemmatize(q_title)
+                    word_frequency = [entries.get('link')[45:], dict()]
+                    for word in token_list:
+                        if word_frequency[1].get(word) != None:
+                            word_frequency[1][word] += 1
+                        else:
+                            word_frequency[1][word] = 1
+
+def json_reading_post(crawl_list):
+    # Reading the json files with the crawl information for the purposes of
+    # creating a postings list for easier access to a certain question with
+    # a specific word. In theory, should make searches easier.
+    pass
 
 if __name__ == "__main__":
     with open("word_frequency.json", "w") as outfile:
-        json_reading(crawl_list)
+        json_reading_freq(crawl_list)
         json_list = json.dumps(crawl_list)
         outfile.write(json_list)
