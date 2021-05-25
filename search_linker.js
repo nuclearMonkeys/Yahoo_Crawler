@@ -10,5 +10,15 @@
 // })
 
 var options = {
-    host: 'private-github-api.com'
+    host: 'api.github.com',
+    pathPrefix: 'null',
+    protocol: 'https',
+    owner: 'nuclearMonkeys',
+    repo: 'YahooAnswers',
+    path: 'JSON_data/test_crawl14.json'
 }
+
+var GithubDB = require("./node_modules/github-db/dist/githubdb.js").default;
+var githubDB = new GithubDB(options);
+
+// githubDB.auth()
