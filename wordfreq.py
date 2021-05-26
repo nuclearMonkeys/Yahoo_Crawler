@@ -5,9 +5,6 @@ from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
 import json
 
-crawl_test = ["test_crawl15.json", "test_crawl16.json", "test_crawl17.json"]
-crawl_list = list()
-
 # Words that will not be included in the word frequency list.
 stopWords = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
              'v', 'w', 'x', 'y', 'z', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any',
@@ -78,15 +75,20 @@ def check_if_question(entry):
         return False
     return True
 
-def json_reading_freq(crawl_list):
+def json_reading_freq(crawl_test, crawl_list):
     # Reading the json files with the crawl information for the purposes of
     # compiling word frequency for each question and answer.
     for crawl in crawl_test:
-        with open(crawl, "r", encoding='utf8', errors='ignore') as crawl_data:
-            YahooObject = json.loads(crawl_data)
+        print(crawl)
+        with open(crawl, encoding='utf-8', errors='ignore') as crawl_data:
+            YahooObject = json.loads(crawl_data.read(), strict = False)
             for entries in YahooObject:
                 if check_if_question(entries):
                     q_title = entries.get("title")
+                    try:
+                        print(q_title)
+                    except:
+                        continue
                     token_list = tokenizeAndLemmatize(q_title)
                     word_frequency = [entries.get('link')[45:], dict()]
                     for word in token_list:
@@ -94,6 +96,7 @@ def json_reading_freq(crawl_list):
                             word_frequency[1][word] += 1
                         else:
                             word_frequency[1][word] = 1
+                    crawl_list.append(word_frequency)
 
 def json_reading_post(crawl_list):
     # Reading the json files with the crawl information for the purposes of
@@ -102,7 +105,9 @@ def json_reading_post(crawl_list):
     pass
 
 if __name__ == "__main__":
+    crawl_test = ["test_crawl15.json", "test_crawl16.json"]
+    crawl_list = list()
     with open("word_frequency.json", "w") as outfile:
-        json_reading_freq(crawl_list)
+        json_reading_freq(crawl_test, crawl_list)
         json_list = json.dumps(crawl_list)
         outfile.write(json_list)
