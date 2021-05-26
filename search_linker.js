@@ -9,6 +9,8 @@
     
 // })
 
+var pt = require("./personal_token.js");
+
 var options = {
     host: 'api.github.com',
     pathPrefix: 'null',
