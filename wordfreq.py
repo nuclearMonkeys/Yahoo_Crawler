@@ -81,7 +81,7 @@ def json_reading_freq(crawl_test, crawl_list):
     for crawl in crawl_test:
         print(crawl)
         with open(crawl, encoding='utf-8', errors='ignore') as crawl_data:
-            YahooObject = json.loads(crawl_data.read(), strict = False)
+            YahooObject = json.loads(crawl_data.read())
             for entries in YahooObject:
                 if check_if_question(entries):
                     q_title = entries.get("title")
@@ -98,16 +98,24 @@ def json_reading_freq(crawl_test, crawl_list):
                             word_frequency[1][word] = 1
                     crawl_list.append(word_frequency)
 
-def json_reading_post(crawl_list):
+def json_reading_post(crawl_test, crawl_dict):
     # Reading the json files with the crawl information for the purposes of
     # creating a postings list for easier access to a certain question with
     # a specific word. In theory, should make searches easier.
-    pass
+    for crawl in crawl_test:
+        print(crawl)
+        with open(crawl, encoding='utf-8', errors='ignore') as crawl_data:
+            YahooObject = json.loads(crawl_data.read())
 
 if __name__ == "__main__":
-    crawl_test = ["test_crawl15.json", "test_crawl16.json"]
+    crawl_test = ["test_crawl15.json", "test_crawl16.json", "test_crawl17.json"]
     crawl_list = list()
+    crawl_dict = dict()
     with open("word_frequency.json", "w") as outfile:
         json_reading_freq(crawl_test, crawl_list)
         json_list = json.dumps(crawl_list)
         outfile.write(json_list)
+    with open("Yahoo_postingslist.json", "w") as outfile2:
+        json_reading_post(crawl_test, crawl_dict)
+        json_dict = json.dumps(crawl_dict)
+        outfile2.write(json_dict)
