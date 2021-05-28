@@ -3,6 +3,7 @@
 import nltk
 from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
+import math
 import json
 
 # Words that will not be included in the word frequency list.
@@ -125,15 +126,37 @@ def json_reading_post(crawl_test, crawl_dict):
     for key in sorted(temp_dict):
         crawl_dict[key] = list(temp_dict[key])
 
+def tf_idf(json_file, word_freq, postings):
+    # Compiles the term frequency and the inverse document frequency for each
+    # word, then multiples the two values. Writes a new file.
+    term_freq = list()
+    quest_count = len(word_freq)
+    for d in word_freq:
+        current_doc = [d[0]]
+        word_dict = d[1]
+        numofwords = len(word_dict.keys())
+        doc_dict = dict()
+        for word, value in word_dict.items():
+            tf = value/float(numofwords)
+            doc_dict[word] = tf
+        current_doc.append(doc_dict)
+        term_freq.append(current_doc)
+    
+    for w, v in postings.items():
+        pass
+
 if __name__ == "__main__":
     crawl_test = ["test_crawl15.json", "test_crawl16.json", "test_crawl17.json"]
     crawl_list = list()
     crawl_dict = dict()
-    #with open("word_frequency.json", "w") as outfile:
-    #    json_reading_freq(crawl_test, crawl_list)
-    #    json_list = json.dumps(crawl_list)
-    #    outfile.write(json_list)
+    with open("word_frequency.json", "w") as outfile:
+        json_reading_freq(crawl_test, crawl_list)
+        json_list = json.dumps(crawl_list)
+        outfile.write(json_list)
     with open("Yahoo_postingslist.json", "w") as outfile2:
         json_reading_post(crawl_test, crawl_dict)
         json_dict = json.dumps(crawl_dict)
         outfile2.write(json_dict)
+    with open("YahooBlock.json", "w") as outfile3:
+        tf_idf(outfile3, crawl_list, crawl_dict)
+
