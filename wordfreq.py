@@ -3,6 +3,7 @@
 import nltk
 from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
+import math
 import json
 
 # Words that will not be included in the word frequency list.
@@ -102,10 +103,47 @@ def json_reading_post(crawl_test, crawl_dict):
     # Reading the json files with the crawl information for the purposes of
     # creating a postings list for easier access to a certain question with
     # a specific word. In theory, should make searches easier.
+    temp_dict = dict()
     for crawl in crawl_test:
         print(crawl)
-        with open(crawl, encoding='utf-8', errors='ignore') as crawl_data:
-            YahooObject = json.loads(crawl_data.read())
+        with open(crawl, encoding='utf-8', errors='ignore') as crawl_data2:
+            YahooObject2 = json.loads(crawl_data2.read())
+            for entries in YahooObject2:
+                if check_if_question(entries):
+                    q_title2 = entries.get("title")
+                    try:
+                        print(q_title2)
+                    except:
+                        continue
+                    token_list2 = tokenizeAndLemmatize(q_title2)
+                    quest_id = entries.get('link')[45:]
+                    for word in token_list2:
+                        if temp_dict.get(word) != None:
+                            temp_dict[word].add(quest_id)
+                        else:
+                            temp_dict[word] = {quest_id}
+    
+    for key in sorted(temp_dict):
+        crawl_dict[key] = list(temp_dict[key])
+
+def tf_idf(json_file, word_freq, postings):
+    # Compiles the term frequency and the inverse document frequency for each
+    # word, then multiples the two values. Writes a new file.
+    term_freq = list()
+    quest_count = len(word_freq)
+    for d in word_freq:
+        current_doc = [d[0]]
+        word_dict = d[1]
+        numofwords = len(word_dict.keys())
+        doc_dict = dict()
+        for word, value in word_dict.items():
+            tf = value/float(numofwords)
+            doc_dict[word] = tf
+        current_doc.append(doc_dict)
+        term_freq.append(current_doc)
+    
+    for w, v in postings.items():
+        pass
 
 if __name__ == "__main__":
     crawl_test = ["test_crawl15.json", "test_crawl16.json", "test_crawl17.json"]
@@ -119,3 +157,6 @@ if __name__ == "__main__":
         json_reading_post(crawl_test, crawl_dict)
         json_dict = json.dumps(crawl_dict)
         outfile2.write(json_dict)
+    with open("YahooBlock.json", "w") as outfile3:
+        tf_idf(outfile3, crawl_list, crawl_dict)
+
