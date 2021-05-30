@@ -1,0 +1,15 @@
+This directory is the data that search_linker.js uses.
+It contains the questions and answers (q&a) crawled from
+Yahoo Answers prior to its shutdown on May 4th, 2021.
+This data possibly contains inapproriate/offensive q&as from
+various users. The creators of this project have no original
+q&as submitted to the site. We merely created a search engine
+for the data we've crawled.
+
+With that said, we want users to report to us q&as that are
+overly insensitive that it shouldn't be allowed on the database.
+We will then evaluate the data submitted and judge whether or
+not to get rid of it. We will do this with minimal censorship so
+the data in question will have to be something that violates terms
+& services on Github (i.e. hate speech). Simple expression of opinions 
+does not count.

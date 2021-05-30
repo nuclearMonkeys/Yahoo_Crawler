@@ -11,7 +11,7 @@ import id_modifier as id
 if __name__ == '__main__':
     # json_file = input()
     file_names = ["test_crawl14.json", "test_crawl16.json", "test_crawl17.json"]
-    file_list = [open(file) for file in file_names]
+    file_list = [open(file, 'r', encoding='utf-8') for file in file_names]
 
     # check_if_answer_dup(connection, {"a_id": 12179, "q_id": 925, "answer": "I personally loved it...because the person I rode with hates Wild Mouse Rides. XD Best ride EVER. ...Seriously, that was really stupid (well, okay, it was smart, but in a mean way) for them to advertise it as a \"roller coaster\" since it''s a \"wild mouse coaster\". The trick they did with it was that they just called it a \"coaster\", not a \"roller coaster\". That''s where they''re getting everyone. I guess my wait wasn''t SO bad, but it was long and boring. I wasn''t upset however, because the above really did happen. But I was with my family, and not all of them were as fortunate. And DAAAAAMN...were they pi$$ed!!! Worst experience of their lives. Seriously, they''ll probably take it down in like (hopefully) 10 years once it''s run its course. Seriously, it''s such a disappointment to all fans of the series and the park. That was a really stupid move on Six Flags'' part...unless you''re a parent and your child loved it of course. And if the child was scared of his or her mind, then those 10 years might actually come true. XD Oh well. Here''s to hoping that Six Flags gives us a good Free Fall replacement...because that''s the end of Batman & Robin. =\\ ", "user": "MetaWarrior", "u_id": "RTzJhnBSaa", "userpage": "https://answers.yahoo.com/activity/questions?show=RTzJhnBSaa", "likes": "1", "dislikes": "0"})
 
