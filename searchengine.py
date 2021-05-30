@@ -13,7 +13,7 @@ class Yahoo_Search:
             self.post_list = json.loads(postings_list.read())
     
     def _tfidfListCreate(self, query):
-        # Calculating the tf and idf for a query, in the form of a list.
+        # Calculating the tf and idf for a query, in the form of a list. SCRAPPED
         tfidfList = list()
         newquery = list()
         visited_terms = set()
@@ -31,9 +31,36 @@ class Yahoo_Search:
         # data for all matching questions or questions with those terms. Requires wordfreq.py
         # to be run first.
         current_query = tokenizeAndLemmatize(query)
-        cquery_len = len(query)
+        cquery_len = len(current_query)
         if cquery_len <= 0:
             return []
+        question_list = list()
+        if len(current_query) == 1:
+            qs = self.post_list[query]
+            for entry in self.word_freq:
+                for qid in qs:
+                    if entry[0] == qid:
+                        question_dict = {"qid": qid}
+                        query_num = entry[1].get(current_query[0])
+                        question_dict[current_query[0]] = query_num
+                        question_list.append(question_dict)
+            questions = sorted(question_list, key = lambda x: list(x.items())[1], reverse = True)
+            return list(questions)
+        else:
+            q_list = list()
+            for chara in current_query:
+                q_list += self.post_list[chara]
+            for entry in self.word_freq:
+                for qid in q_list:
+                    if entry[0] == qid:
+                        question_dict = {"qid": qid}
+                        for chara2 in current_query:
+                            if chara2 in entry[1].keys():
+                                query_num = entry[1][chara2]
+                                question_dict[chara2] = query_num
+                            else:
+                                question_dict[chara2] = 0
+                        question_list.append(question_dict)
 
 if __name__ == "__main__":
     search = Yahoo_Search()

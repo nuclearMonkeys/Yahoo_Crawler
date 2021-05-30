@@ -129,6 +129,7 @@ def json_reading_post(crawl_test, crawl_dict):
 def tf_idf(json_file, word_freq, postings):
     # Compiles the term frequency and the inverse document frequency for each
     # word, then multiples the two values. Writes a new file.
+    # SCRAPPED
     term_freq = list()
     quest_count = len(word_freq)
     for d in word_freq:
@@ -142,8 +143,11 @@ def tf_idf(json_file, word_freq, postings):
         current_doc.append(doc_dict)
         term_freq.append(current_doc)
     
+    inverse_freq = dict()
     for w, v in postings.items():
-        pass
+        current_word = w
+        idf = math.log(quest_count/len(v))
+        inverse_freq[w] = idf
 
 if __name__ == "__main__":
     crawl_test = ["test_crawl15.json", "test_crawl16.json", "test_crawl17.json"]
@@ -157,6 +161,6 @@ if __name__ == "__main__":
         json_reading_post(crawl_test, crawl_dict)
         json_dict = json.dumps(crawl_dict)
         outfile2.write(json_dict)
-    with open("YahooBlock.json", "w") as outfile3:
-        tf_idf(outfile3, crawl_list, crawl_dict)
+    #with open("YahooBlock.json", "w") as outfile3:
+    #    tf_idf(outfile3, crawl_list, crawl_dict)
 
