@@ -1,63 +1,96 @@
 import database_modifier as dbase
 import id_modifier as id
-import unicodedata
-import emoji
+
+# These write functions will have redundant code
+# I needed a quick fix and copy and pasting code
+# is more time efficent short term
+# NOTE: Fix this with a generic function
 
 def write_questions(filename, questions):
-    writer = open(filename, 'w+', encoding='utf-8')
-    writer.writelines('var questions_dict = {\n')
-    
-    # a = "\U0001F600"
-    # print(a)
-    # writer.writelines(a)
+    current_file_index = 0
+    questions_per_file = 50
 
-    for question in questions:
-        question_string = "\t" + str(question[0]) + " : " + "[" 
-        for element in question[1:6]:
-            if isinstance(element, str):
-                # This ugly, but it prevents errors
-                element = element.replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
-                question_string += '"' + element + '"' + ", "
-            else:
-                question_string += str(element) + ", "
-        question_string += '"' + question[6] + '"' + "],\n"
+    # while there's still stuff on the questions list
+    while(len(questions) > 0):
+        writer = open(filename + "_" + str(current_file_index) + ".js", 'w+', encoding='utf-8')
+        current_questions = questions[:questions_per_file]
 
-        print(question_string)
-        writer.writelines(question_string)
+        question_string = "var questions_dict = {\n"
 
-    writer.writelines('}')
+        for question in current_questions:
+            question_string += "\t" + str(question[0]) + " : " + "[" 
+            for element in question[1:6]:
+                if isinstance(element, str):
+                    # This ugly, but it prevents errors
+                    element = element.replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
+                    question_string += '"' + element + '"' + ", "
+                else:
+                    question_string += str(element) + ", "
+            question_string += '"' + question[6] + '"' + "],\n"
+
+        current_file_index += 1
+
+        writer.writelines(question_string + '}')
+        writer.close()
+        try:
+            
+            questions = questions[questions_per_file:]
+        except IndexError:
+            questions = list()
     
 def write_answers(filename, answers):
-    writer = open(filename, 'w+', encoding='utf-8')
-    writer.writelines('var answers_dict = {\n')
+    current_file_index = 0
+    answers_per_file = 50
 
-    for answer in answers:
-        answer_string = "\t" + str(answer[0]) + " : " + "["
-        for element in answer[1:3]:
-            if isinstance(element, str):
-                # This ugly, but it prevents errors
-                element = element.replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
-                answer_string += '"' + element + '"' + ", "
-            else:
-                answer_string += str(element) + ", "
-        answer_string += '"' + answer[3] + '"' + "],\n"
-        
-        print(answer_string)
-        writer.writelines(answer_string)
+    # while there's still stuff on the questions list
+    while(len(answers) > 0):
+        writer = open(filename + "_" + str(current_file_index) + ".js", 'w+', encoding='utf-8')
+        current_answers = answers[:answers_per_file]
 
-    writer.writelines('}')
-    print()
+        answer_string = "var answers_dict = {\n"
+
+        for answer in current_answers:
+            answer_string += "\t" + str(answer[0]) + " : " + "["
+            for element in answer[1:3]:
+                if isinstance(element, str):
+                    element = element.replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
+                    answer_string += '"' + element + '"' + ", "
+                else:
+                    answer_string += str(element) + ", "
+            answer_string += '"' + answer[3] + '"' + "],\n"
+
+        current_file_index += 1
+
+        writer.writelines(answer_string + '}')
+        writer.close()
+
+        try:
+            answers = answers[answers_per_file:]
+        except IndexError:
+            answers = list()
 
 def write_users(filename, users):
-    writer = open(filename, 'w+', encoding='utf-8')
-    writer.writelines('var users_dict = {\n')
+    current_file_index = 0
+    users_per_file = 50
 
-    for user in users:
-        user_string = "\t" + '"' + user[0] + '" : "' + user[1].replace('"', '\\"') + '",\n'
-        print(user_string)
-        writer.writelines(user_string)
+    while(len(users) > 0):
+        writer = open(filename + "_" + str(current_file_index) + ".js", 'w+', encoding='utf-8')
+        current_users = users[:users_per_file]
 
-    writer.writelines('}')
+        user_string = "var users_dict = {\n"
+
+        for user in current_users:
+            user_string += "\t" + '"' + user[0] + '" : "' + user[1].replace('"', '\\"') + '",\n'
+        
+        current_file_index += 1
+
+        writer.writelines(user_string + '}')
+        writer.close()
+
+        try:
+            users = users[users_per_file:]
+        except IndexError:
+            users = list()
 
 if __name__ == '__main__':
     connection = dbase.connect_to_database("localhost", "root", "", "yahoo_answers_archive")
@@ -66,6 +99,6 @@ if __name__ == '__main__':
     answers = dbase.read_query(connection, "SELECT * FROM answers")
     users = dbase.read_query(connection, "SELECT * FROM users")
 
-    # write_questions("./js_dictionaries/questions.js", questions)
-    # write_answers("./js_dictionaries/answers.js", answers)
-    # write_users("./js_dictionaries/users.js", users)
+    write_questions("./js_dictionaries/questions/questions", questions)
+    write_answers("./js_dictionaries/answers/answers", answers)
+    write_users("./js_dictionaries/users/users", users)
