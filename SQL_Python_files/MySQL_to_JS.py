@@ -1,5 +1,5 @@
-import database_modifier as dbase
-import id_modifier as id
+import SQL_Python_files.database_modifier as dbase
+import SQL_Python_files.id_modifier as id
 
 # These write functions will have redundant code
 # I needed a quick fix and copy and pasting code

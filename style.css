@@ -1,39 +1,135 @@
-/* This file is derived from: https://pagedart.com/blog/how-to-add-a-search-bar-in-html/ */
+/* File derived from Coding Nepal Web:
+https://codingnepalweb.com/full-screen-search-bar-animation-html-css/ */
 
-form 
-{
-    background-color: #4654e1;
-    width:  300px;
-    height: 44px;
-    border-radius:  5px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-input 
+body {
+    position: relative;
+    font-family: "Poppins", san-serif;
+}
+
+.wrapper, .search-data 
 {
-    all: unset;
-    font: 16px system-ui;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wrapper 
+{
+    position: fixed;
+    height: 0px;
+    width: 0px;
+    border-radius: 100%;
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+    transition: all 0.4s linear;
+}
+
+.wrapper.active
+{
+    height: 4000px;
+    width: 4000px;
+}
+
+.search-btn 
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+
+.search-btn span 
+{
     color: #fff;
+    font-size: 22px;
+    line-height: 60px;
+}
+
+.search-data 
+{
+    position: absolute;
+    height: 50px;
+    width: 400px;
+    display: flex;
+    text-align: center;
+}
+
+.search-data input 
+{
     height: 100%;
     width: 100%;
-    padding: 6px 10px;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 22px;
+    font-weight: 500;
+    color: #fff;
 }
 
-button 
+.search-data .line 
 {
-    all: unset;
-    cursor: pointer;
-    width: 44px;
-    height: 44px;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #fff;
+    bottom: 0;
 }
 
-svg 
+.search-data label 
+{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    font-size: 20px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgba(255,255,255,0.7);
+}
+
+.search-data input:valid ~ label 
+{
+    /* display: none; */
+    opacity: 0;
+}
+
+.search-data span 
 {
     color: #fff;
-    fill: currentColor;
-    width: 24px;
-    height: 24px;
-    padding: 10px;
+    position: absolute;
+    width: 50px;
+    font-size: 25px;
+    right: 0;
+    top: 0;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+.close-btn 
+{
+    position: absolute;
+    z-index: 99;
+    right: 25px;
+    top: 25px;
+    font-size: 25px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search-data, .search-data span,
+.search-data label, .close-btn 
+{
+    display: none;
 }

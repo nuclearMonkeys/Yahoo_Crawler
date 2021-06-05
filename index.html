@@ -1,27 +1,60 @@
-<!-- This file is derived from: https://pagedart.com/blog/how-to-add-a-search-bar-in-html/ -->
+<!-- File derived from Coding Nepal Web: -->
+<!-- https://codingnepalweb.com/full-screen-search-bar-animation-html-css/  -->
 
-<html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Yahoo Answers Search Box</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    </head>
 
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <body>
+        <div class="close-btn">
+            <span class="fas fa-times"></span>
+        </div>
+        <div class="wrapper">
+            <div class="search-btn">
+                <span class="fas fa-search"></span>
+            </div>
+            <div class="search-data">
+                <input type="text" required>
+                <div class="line"></div>
+                <label>Type to search...</label>
+                <span class="fas fa-search"></span>
+            </div>
+        </div>
 
-<form id="form" role="search">
-    <input type="search" id="query" name="q"
-    placeholder=""
-    aria-label="Search through site content">
-    <button>
-        <svg viewBox="0 0 1024 1024"><path class="path1" 
-            d="M848.471 928l-263.059-263.059c-48.941 
-            36.706-110.118 55.059-177.412 55.059-171.294 
-            0-312-140.706-312-312s140.706-312 312-312c171.294 
-            0 312 140.706 312 312 0 67.294-24.471 
-            128.471-55.059 177.412l263.059 263.059-79.529 
-            79.529zM189.623 408.078c0 121.364 97.091 218.455 
-            218.455 218.455s218.455-97.091 
-            218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364
-             0-218.455 97.091-218.455 218.455z"></path></svg>
-    </button>
-</form>
+        <script>
+            $(".search-btn").click(function()
+            {
+                $(".wrapper").addClass("active");
+                $(this).css("display", "none");
+                $(".search-data").fadeIn(500);
+                $(".close-btn").fadeIn(500);
+                $(".search-data .line").addClass("active");
+                setTimeout(function() 
+                {
+                    $("input").focus();
+                    $(".search-data label").fadeIn(500);
+                    $(".search-data span").fadeIn(500);
+                }, 200);
+            });
 
+            $(".close-btn").click(function()
+            {
+                $(".wrapper").removeClass("active");
+                $(".search-btn").fadeIn(800);
+                $(".search-data").fadeOut(500);
+                $(".close-btn").fadeOut(500);
+                $(".search-data .line").removeClass("active");
+                $("input").val("");
+                $(".search-data label").fadeOut(500);
+                $(".search-data span").fadeOut(500);
+            });
+        </script>
+
+    </body>
 </html>

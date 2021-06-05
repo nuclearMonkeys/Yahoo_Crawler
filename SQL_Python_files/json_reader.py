@@ -1,6 +1,6 @@
 import json
-import database_modifier as dbase
-import id_modifier as id
+import SQL_Python_files.database_modifier as dbase
+import SQL_Python_files.id_modifier as id
 # from id_modifier import _q_id_counter, _a_id_counter, _q_id_marker, _a_id_marker
 
 ##################################################################

@@ -3,7 +3,7 @@
 # Created by: Lyndon de la Torre
 
 import json
-import database_modifier as dbase
+import SQL_Python_files.database_modifier as dbase
 
 ####################################################################
 # The purpose of this script is to check for duplicate questions   #
