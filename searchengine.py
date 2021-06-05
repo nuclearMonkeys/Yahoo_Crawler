@@ -7,10 +7,12 @@ from wordfreq import tokenizeAndLemmatize
 class Yahoo_Search:
     # The main class used for searching questions.
     def __init__(self):
-        with open("word_frequency2.json", encoding = 'utf-8', errors = 'ignore') as word_frequency:
+        with open("word_frequency.json", encoding = 'utf-8', errors = 'ignore') as word_frequency:
             self.word_freq = json.loads(word_frequency.read())
         with open("Yahoo_postingslist.json", encoding = 'utf-8', errors = 'ignore') as postings_list:
             self.post_list = json.loads(postings_list.read())
+        with open("yahoo_questions.json", encoding = 'utf-8', errors = 'ignore') as questions:
+            self.questions = json.loads(questions.read())
     
     def _tfidfListCreate(self, query):
         # Calculating the tf and idf for a query, in the form of a list. SCRAPPED
@@ -36,16 +38,19 @@ class Yahoo_Search:
             return []
         question_list = list()
         if len(current_query) == 1:
-            qs = self.post_list[query]
-            for entry in self.word_freq:
-                for qid in qs:
-                    if entry[0] == qid:
-                        question_dict = {"qid": qid}
-                        query_num = entry[1].get(current_query[0])
-                        question_dict[current_query[0]] = query_num
-                        question_list.append(question_dict)
+            qs = self.post_list.get(current_query[0])
+            for qid in qs:
+                words = self.word_freq.get(qid)
+                question_dict = {"qid": qid}
+                query_num = words.get(current_query[0])
+                question_dict[current_query[0]] = query_num
+                question_list.append(question_dict)
             questions = sorted(question_list, key = lambda x: list(x.items())[1], reverse = True)
-            return list(questions)
+            final_questions = list()
+            for q in list(questions):
+                current_qid = q.get("qid")
+                final_questions.append(self.questions.get(current_qid)[0])
+            return final_questions
         else:
             q_list = list()
             for chara in current_query:
