@@ -22,7 +22,7 @@
             <div class="search-data">
                 <input type="text" required>
                 <div class="line"></div>
-                <label>Type to search...</label>
+                <label id=invalid>Type to search...</label>
                 <span class="fas fa-search"></span>
             </div>
         </div>
@@ -53,6 +53,30 @@
                 $("input").val("");
                 $(".search-data label").fadeOut(500);
                 $(".search-data span").fadeOut(500);
+            });
+
+            $(".search-data").click(function()
+            {
+
+                const script0 = document.createElement("script");
+                script0.src = './js_dictionaries/answers/answers_0.js'
+                script0.type = "text/javascript"
+
+                const script1 = document.createElement("script");
+                script1.src = './js_dictionaries/answers/answers_1.js'
+                script1.type = "text/javascript"
+
+                // This is making the script known to HTML
+                // you can only append one script at a time
+                document.head.appendChild(script0);
+                // document.head.appendChild(script1);
+
+                // script.
+                document.getElementById("invalid").innerHTML = answers_dict[1];
+
+                // remove the script after being read
+                script0.remove()
+                // console.log(script);
             });
         </script>
 
