@@ -1,0 +1,69 @@
+<!-- File derived from Coding Nepal: -->
+<!-- https://www.codingnepalweb.com/responsive-accordion-menu-html-css/  -->
+
+<!DOCTYPE html>
+<html lang='en' dir='ltr'>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Responsive Accordian Menu</title>
+        <link rel="stylesheet" href="search_style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    </head>
+
+    <body>
+        <div class="wrapper">
+
+            <div class="parent-tab">
+                <input type="radio" name="tab" id="tab-1" checked>
+                <label for="tab-1">
+                    <span>Accordian Heading One</span>
+                    <div class="icon"><i class="fas fa-plus"></i></div>
+                </label>
+
+                <div class="content">
+                    <p>This is a test paragraph for the accordian based menu. No 
+                        meaningful content here.</p>
+                </div>
+            </div>
+
+            <div class="parent-tab tab-3">
+                <input type="radio" name="tab" id="tab-3">
+                <label for="tab-3" class="tab-3">
+                    <span>Accordian Heading Three</span>
+                    <div class="icon"><i class="fas fa-plus"></i></div>
+                </label>
+
+                <div class="content">
+                    <div class="child-tab">
+                        <input type="checkbox" name="sub-tab" id="tab-4">
+                        <label for="tab-4">
+                            <span>Sub Heading One</span>
+                            <div class="icon"><i class="fas fa-plus"></i></div>
+                        </label>
+
+                        <div class="sub-content">
+                            <p>True to Caesar</p>
+                        </div>
+                    </div>
+
+                    <div class="child-tab">
+                        <input type="checkbox" name="sub-tab" id="tab-5">
+                        <label for="tab-5">
+                            <span>Sub Heading Two</span>
+                            <div class="icon"><i class="fas fa-plus"></i></div>
+                        </label>
+
+                        <div class="sub-content">
+                            <p>Patrolling the Mojave makes you wish for a nuclear winter</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+</html>

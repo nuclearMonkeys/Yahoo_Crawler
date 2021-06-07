@@ -1,4 +1,4 @@
-<!-- File derived from Coding Nepal Web: -->
+<!-- File derived from Coding Nepal: -->
 <!-- https://codingnepalweb.com/full-screen-search-bar-animation-html-css/  -->
 
 <!DOCTYPE html>
@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <title>Yahoo Answers Search Box</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="index_style.css">
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     </head>
@@ -68,14 +68,14 @@
 
                 // This is making the script known to HTML
                 // you can only append one script at a time
-                document.head.appendChild(script0);
+                var obj0 = document.head.appendChild(script0);
                 // document.head.appendChild(script1);
 
                 // script.
                 document.getElementById("invalid").innerHTML = answers_dict[1];
 
                 // remove the script after being read
-                script0.remove()
+                script0.remove(obj0)
                 // console.log(script);
             });
         </script>
