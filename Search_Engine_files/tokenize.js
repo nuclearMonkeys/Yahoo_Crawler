@@ -19,6 +19,7 @@ var stopWords = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
 
 function isAlphaNumeric(str) // Code taken from https://stackoverflow.com/questions/4434076/best-way-to-alphanumeric-check-in-javascript.
 {
+  // Used to determine alphanumeric characters
   var code, i, len;
 
   for (i = 0, len = str.length; i < len; i++) {
@@ -34,6 +35,7 @@ function isAlphaNumeric(str) // Code taken from https://stackoverflow.com/questi
 
 function JSTokenize(text)
 {
+    // Version of my previous tokenizer, translated into JavaScript
     var tokenlist = [];
     var splittext = text.split(" ");
     for (var i = 0; i != splittext.length; i++)
