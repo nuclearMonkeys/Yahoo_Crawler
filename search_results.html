@@ -2,6 +2,20 @@
 <!-- https://www.codingnepalweb.com/responsive-accordion-menu-html-css/  -->
 
 <!DOCTYPE html>
+<script>
+var id_list = [1, 2, 3, 4, 5]
+var script_list = []
+
+for (var i = 0; i < id_list.length; i++) 
+{
+    const script = document.createElement("script");
+    script.src = './js_dictionaries/questions/questions_' + Math.floor(id_list[i]/ 50) + '.js'
+    script.type = "text/javascript";
+
+    script_list.push(script)
+}
+</script>
+
 <html lang='en' dir='ltr'>
     <head>
         <meta charset="utf-8">
@@ -9,6 +23,7 @@
         <title>Responsive Accordian Menu</title>
         <link rel="stylesheet" href="search_style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <!-- <script src="./js_dictionaries/questions/questions_0.js"></script> -->
     </head>
 
     <span onclick="transitionToPage('https://www.google.com')"> </span>
@@ -19,20 +34,25 @@
     </body>
 
 <script>
-var ls = [1,2,3,4,5];
-buildTable(ls);
+buildTable(id_list);
 
 function buildTable(data) 
 {
     var results = document.getElementById('results')
-    // results.innerHTML = '';
     
+    // based on the id, % 50 to find the file index
+    // var file_index = ; 
+
     for (var i = 0; i < data.length*3; i += 3) 
     {
+
+        var a = "questions_dict[1]"
+        // console.log(questions_dict[1])
+
         var row =  `<div class="parent-tab tab-${i}}">
         <input type="radio" name="tab" id="tab-${i}">
         <label for="tab-${i}" class="tab-${i}">
-            <span>Accordian Heading Something</span>
+            <span id="question-title-${i/3}">${a}</span>
             <div class="icon"><i class="fas fa-plus"></i></div>
         </label>
 
@@ -62,12 +82,19 @@ function buildTable(data)
             </div>
         </div>
         `;
-        console.log(row);
+        // var questions_dict = {}
         results.innerHTML += row;
+        // console.log(results.innerHTML)
+
+
+        document.getElementById("question-title-"+ (i/3)).innerText = questions_dict[1][0]
+    }
+
+    for (var i = 0; i < data.length; i++) 
+    {
+
     }
 }
-
-
-
 </script>
+
 </html>
