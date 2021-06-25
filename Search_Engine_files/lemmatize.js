@@ -43,6 +43,21 @@ function lemmatizetokens(tokenlist)
     return lemmalist;
 }
 
+function getObjectKeysAlphabetical(obj) // Function pulled from https://stackoverflow.com/questions/20998405/sort-json-dictionary-of-dictionaries-alphabetically-by-value
+{
+    var keys = [],
+        key;
+
+    for (key in obj) {
+        if (obj.hasOwnProperty(key))
+            keys.push(key);
+    }
+
+    keys.sort();
+
+    return keys;
+}
+
 function JSReadingFreq(wordfrequency)
 {
     // A version of the function used to create a word frequency file, translated
@@ -98,4 +113,14 @@ fs.readFile("yahoo_questions.json", function(err, buf) {
     }
     var json_string2 = JSON.stringify(word_frequency);
     fs.writeFile("JSWord_Frequency.json", json_string2);
+
+    var keys = getObjectKeysAlphabetical(p_dict);
+    for (var key in keys)
+    {
+        var value = p_dict[key];
+        postings[key] = Array.from(value);
+    }
+    
+    var json_string3 = JSON.stringify(postings);
+    fs.writeFile("JSPostings_List.json", json_string3);
 });
