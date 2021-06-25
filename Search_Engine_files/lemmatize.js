@@ -47,7 +47,6 @@ function JSReadingFreq(wordfrequency)
 {
     // A version of the function used to create a word frequency file, translated
     // into Javascript.
-
 }
 
 function JSReadingPost(postingslist)
@@ -58,6 +57,8 @@ function JSReadingPost(postingslist)
 
 fs.readFile("yahoo_questions.json", function(err, buf) {
     var json_string = "";
+    var word_frequency = {}; // For Word Frequency file
+    var postings = {}; // For Postings List file
     if (err) 
     {
         return console.error(err);
@@ -71,6 +72,7 @@ fs.readFile("yahoo_questions.json", function(err, buf) {
         token_list = JSTokenize(q_title);
         lemma_list = lemmatizetokens(token_list);
         var q_dict = {};
+        var p_dict = {};
         for (var word in lemma_list)
         {
             if (!(word in q_dict))
@@ -81,8 +83,19 @@ fs.readFile("yahoo_questions.json", function(err, buf) {
             {
                 q_dict[word] += 1;
             }
+
+            if (!(word in p_dict))
+            {
+                p_dict[word] = new Set();
+                p_dict[word].add(key);
+            }
+            else
+            {
+                p_dict[word].add(key);
+            }
         }
-        json_string2 = "";
-        
+        word_frequency[key] = q_dict;
     }
+    var json_string2 = JSON.stringify(word_frequency);
+    fs.writeFile("JSWord_Frequency.json", json_string2);
 });
