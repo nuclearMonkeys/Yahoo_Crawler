@@ -124,11 +124,7 @@ body
     max-height: 100vh;
 }
 
-.tab-3 input:checked ~ .content,
-.tab-6 input:checked ~ .content, 
-.tab-9 input:checked ~ .content,
-.tab-12 input:checked ~ .content,
-.tab-15 input:checked ~ .content
+.parent-tab input:checked ~ .content
 {
     padding: 15px 20px;
 }
