@@ -3,7 +3,7 @@ import json
 # from os import walk
 
 if __name__ == '__main__':
-    path = "./js_dictionaries/answers"
+    path = "./js_dictionaries/questions"
 
     filename_id_start_to_end = dict()
 
@@ -52,10 +52,10 @@ if __name__ == '__main__':
         rows.pop(-1)
         original_file.close()
 
-        revised_file = open(path + "/" + filename, 'w')
+        revised_file = open("./Search_Engine_files/questions_JSON" + "/" + filename[:len(filename)-3] + ".json", 'w')
 
         # print(rows)
-        revised_file.write("var answers_dict = {\n")
+        revised_file.write("{\n")
 
         for row in rows:
             id_string = ""
@@ -65,10 +65,21 @@ if __name__ == '__main__':
                     break
                 else:
                     id_string += element
+
             revised_row = row
-            revised_row = revised_row.replace(id_string, "\t" + str(filename_id_start_to_end[id_string]))
+
+            revised_id_string = '"' + id_string + '"'
+            revised_row = revised_row.replace(id_string, '\t"' + str(filename_id_start_to_end[id_string]) + '"')
+
+            # print(row)
+            if (row == rows[-1]):
+                # print(revised_row)
+                revised_row = revised_row[:-2]
+                # print(revised_row)
+
             revised_file.write(revised_row)
 
-        revised_file.write("}")
+        revised_file.write("\n}")
 
         revised_file.close()
+        # break
