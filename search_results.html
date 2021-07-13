@@ -3,33 +3,15 @@
 
 <!DOCTYPE html>
 <script defer>
-// function loadJSON(callback) 
-// {
-//     var xobj = new XMLHttpRequest();
-//     xobj.overrideMimeType("application/json");
-//     xobj.open('GET', './Search_Engine_files/questions_JSON/questions_0.json')
-//     xobj.onreadystatechange = function () 
-//     {
-//         if (xobj.readyState == 4 && xobj.status == "200") 
-//         {
-//             callback(xobj.responseText);
-//         }
-//     };
-//     xobj.send(null);
-// }
 
-// loadJSON(function(response) {
-//     var actual_JSON = JSON.parse(responseText);
-// });
-
-var id_list = [1, 2, 3, 4, 51]
+var id_list = [1, 2, 3, 4, 40]
 var script_obj_list = []
 var script_list = []
 
 for (var i = 0; i < id_list.length; i++) 
 {
     const script = document.createElement("script");
-    script.src = './js_dictionaries/questions/questions_' + Math.floor(id_list[i]/ 50) + '.js'
+    script.src = './js_dictionaries/questions/questions_' + Math.floor(id_list[i]/ 50) + '.js?v=1001'
     script.type = "text/javascript";
     script.defer = true;
 

@@ -45,14 +45,14 @@ if __name__ == '__main__':
     #     print(item)
     # print()
 
+    revised_file = open("./js_dictionaries/questions/questions.js", 'w')
+
     for filename in filenames:
         original_file = open(path + "/" + filename, 'r')
         rows = original_file.readlines()
         rows.pop(0)
         rows.pop(-1)
         original_file.close()
-
-        revised_file = open("./Search_Engine_files/questions_JSON" + "/" + filename[:len(filename)-3] + ".json", 'w')
 
         # print(rows)
         revised_file.write("{\n")
@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
             revised_file.write(revised_row)
 
-        revised_file.write("\n}")
+    revised_file.write("\n}")
 
-        revised_file.close()
-        # break
+    revised_file.close()
+    # break
