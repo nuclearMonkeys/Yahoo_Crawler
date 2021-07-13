@@ -2,16 +2,18 @@
 <!-- https://www.codingnepalweb.com/responsive-accordion-menu-html-css/  -->
 
 <!DOCTYPE html>
+<script src="./js_dictionaries/questions/questions.js"></script>
+
 <script defer>
 
-var id_list = [1, 2, 3, 4, 40]
+var id_list = [1, 2, 3, 4, 100]
 var script_obj_list = []
 var script_list = []
 
 for (var i = 0; i < id_list.length; i++) 
 {
     const script = document.createElement("script");
-    script.src = './js_dictionaries/questions/questions_' + Math.floor(id_list[i]/ 50) + '.js?v=1001'
+    script.src = './js_dictionaries/questions/questions.js'
     script.type = "text/javascript";
     script.defer = true;
 
@@ -98,7 +100,7 @@ function buildTable(data)
         document.getElementById("question-title-" + (i/3)).innerText = questions_dict[data[i/3]][0]
 
         // script_list[i/3].remove(obj)
-        script_obj_list.shift().remove(script_list.shift()) // Get the first element of script_obj_list
+        // script_obj_list.shift().remove(script_list.shift()) // Get the first element of script_obj_list
 
         console.log(script_obj_list);
     }

@@ -46,6 +46,7 @@ if __name__ == '__main__':
     # print()
 
     revised_file = open("./js_dictionaries/questions/questions.js", 'w')
+    revised_file.write("var questions_dict = {\n")
 
     for filename in filenames:
         original_file = open(path + "/" + filename, 'r')
@@ -55,7 +56,7 @@ if __name__ == '__main__':
         original_file.close()
 
         # print(rows)
-        revised_file.write("{\n")
+        
 
         for row in rows:
             id_string = ""
@@ -68,14 +69,11 @@ if __name__ == '__main__':
 
             revised_row = row
 
-            revised_id_string = '"' + id_string + '"'
-            revised_row = revised_row.replace(id_string, '\t"' + str(filename_id_start_to_end[id_string]) + '"')
+            # revised_id_string = '"' + id_string + '"'
+            revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
 
-            # print(row)
-            if (row == rows[-1]):
-                # print(revised_row)
-                revised_row = revised_row[:-2]
-                # print(revised_row)
+            # if (row == rows[-1]):
+            #     revised_row = revised_row[:-2]
 
             revised_file.write(revised_row)
 
