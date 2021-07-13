@@ -3,14 +3,24 @@
 
 <!DOCTYPE html>
 <script defer>
-// while (doc)
-// if (document.readyState === "complete" || document.readyState === "interactive") 
+// function loadJSON(callback) 
 // {
-//     setTimeout(fn, 1);
-// } else 
-// {
-//     document.addEventListener("DOMContentLoaded");
+//     var xobj = new XMLHttpRequest();
+//     xobj.overrideMimeType("application/json");
+//     xobj.open('GET', './Search_Engine_files/questions_JSON/questions_0.json')
+//     xobj.onreadystatechange = function () 
+//     {
+//         if (xobj.readyState == 4 && xobj.status == "200") 
+//         {
+//             callback(xobj.responseText);
+//         }
+//     };
+//     xobj.send(null);
 // }
+
+// loadJSON(function(response) {
+//     var actual_JSON = JSON.parse(responseText);
+// });
 
 var id_list = [1, 2, 3, 4, 51]
 var script_obj_list = []
