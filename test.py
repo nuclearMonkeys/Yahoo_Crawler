@@ -1,5 +1,6 @@
 import os
 import json
+import ast # This is for the user of literal eval
 # from os import walk
 
 if __name__ == '__main__':
@@ -38,46 +39,81 @@ if __name__ == '__main__':
                 current_file_index += 1
 
         file.close()
+
+    # revised_file = open("./js_dictionaries/questions/questions.js", 'w')
+    # revised_file.write("var questions_dict = {\n")
+
+    # for filename in filenames:
+    #     original_file = open(path + "/" + filename, 'r')
+    #     rows = original_file.readlines()
+    #     rows.pop(0)
+    #     rows.pop(-1)
+    #     original_file.close()
+
+    #     # print(rows)
         
-    # print(filename_id_start_to_end)
 
-    # for item in filename_id_start_to_end.items():
-    #     print(item)
-    # print()
+    #     for row in rows:
+    #         id_string = ""
 
-    revised_file = open("./js_dictionaries/questions/questions.js", 'w')
-    revised_file.write("var questions_dict = {\n")
+    #         for element in row:
+    #             if (element == ' '):
+    #                 break
+    #             else:
+    #                 id_string += element
+
+    #         revised_row = row
+
+    #         # revised_id_string = '"' + id_string + '"'
+    #         revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
+
+    #         # if (row == rows[-1]):
+    #         #     revised_row = revised_row[:-2]
+
+    #         revised_file.write(revised_row)
+
+    # revised_file.write("\n}")
+
+    # revised_file.close()
+
+    # Transition to answers
+    path = "./js_dictionaries/answers"
+
+    filenames = os.listdir(path)
+
+    filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
+
+    revised_file = open(path + "/answers.js", 'w')
+    revised_file.write("var answers_dict = {\n")
 
     for filename in filenames:
         original_file = open(path + "/" + filename, 'r')
+        
         rows = original_file.readlines()
+
         rows.pop(0)
         rows.pop(-1)
-        original_file.close()
-
-        # print(rows)
-        
 
         for row in rows:
-            id_string = ""
+            i = 0
 
             for element in row:
-                if (element == ' '):
+                i += 1
+                if element == ":":
+                    i += 1
                     break
-                else:
-                    id_string += element
+            values = ast.literal_eval(row[i:])[0]
+            values[0] = values[0].replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
+            values[1] = filename_id_start_to_end["\t"+ str(values[1])]
 
-            revised_row = row
-
-            # revised_id_string = '"' + id_string + '"'
-            revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
-
-            # if (row == rows[-1]):
-            #     revised_row = revised_row[:-2]
+            revised_row = row[:i]
+            revised_row += '["' + values[0] + '", '
+            revised_row += str(values[1]) + ', '
+            revised_row += '"' + values[2] + '"],\n'
 
             revised_file.write(revised_row)
 
-    revised_file.write("\n}")
-
-    revised_file.close()
+        original_file.close()
+    
+    revised_file.write("}")
     # break
