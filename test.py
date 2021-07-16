@@ -1,7 +1,7 @@
 import os
 import json
 import ast # This is for the user of literal eval
-# from os import walk
+
 
 # This script is meant to modify the answers and questions
 # js files. This is meant to be modified when we need specific
@@ -9,7 +9,7 @@ import ast # This is for the user of literal eval
 # commented and uncommented
 
 if __name__ == '__main__':
-    path = "./js/dictionaries/answers"
+    path = "./js_dictionaries/answers"
 
     file = open(path + "/answers.js", 'r')
 
@@ -18,8 +18,41 @@ if __name__ == '__main__':
     rows.pop(0)
     rows.pop(-1)
 
+    q_ids_to_a_ids = dict()
+
     for row in rows:
-        print(row)
+        i = 0
+
+        for element in row:
+            i += 1
+            if element == ":":
+                i += 1
+                break
+        values = ast.literal_eval(row[i:])[0]
+        
+        if values[1] not in q_ids_to_a_ids:
+            q_ids_to_a_ids[values[1]] = list()
+        current_q_id = int(row[1:i-2])
+        q_ids_to_a_ids[values[1]].append(current_q_id)
+
+        # print(str(values[1]) +  " " + row[1:i-2])
+
+    file.close()
+
+    revised_file = open(path + "/questions_to_answers.js", 'w')
+
+    revised_file.write("var questions_answers_dict = {\n")
+
+    for element in q_ids_to_a_ids.items():
+        revised_file.write("\t" + str(element[0]) + " : [")
+        for a_id in element[1][:-1]:
+            revised_file.write(str(a_id) + ", ")
+        revised_file.write(str(element[1][-1]) + "],\n")
+
+    revised_file.write("}")
+
+    revised_file.close()
+    # print(rows)
 
     # The dictionary between old q_ids/a_ids and the
     # new q_ids_/a_ids
