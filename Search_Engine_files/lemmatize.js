@@ -1,3 +1,4 @@
+// Lemmatizer and File Construction Module
 // Derek Morales derekm2@uci.edu
 
 var lemmatizer = require("javascript-lemmatizer/js/lemmatizer.js");
@@ -43,7 +44,6 @@ function JSTokenize(text) {
     // Version of my previous tokenizer, translated into JavaScript
     var tokenlist = [];
     var splittext = text.split(" ");
-    //console.log(splittext);
     for (var i = 0; i != splittext.length; i++) {
         var currenttoken = "";
         var ltoken = splittext[i].toLowerCase();
@@ -52,7 +52,6 @@ function JSTokenize(text) {
             if ((code > 47 && code < 58) || // numeric (0-9)
                 (code > 64 && code < 91) || // upper alpha (A-Z)
                 (code > 96 && code < 123)) { // lower alpha (a-z)
-                //console.log(ltoken[x])
                 currenttoken += ltoken[x];
             }
             else {
@@ -62,7 +61,6 @@ function JSTokenize(text) {
                 currenttoken = "";
             }
         }
-        //console.log(currenttoken);
         if (currenttoken != '' && (stopWords.includes(currenttoken) == false)) {
             tokenlist.push(currenttoken);
         }
@@ -106,8 +104,6 @@ function lemmatizetokens(tokenlist) {
             lemmalist.push(lemma.only_lemmas(tokenlist[y], POSList[y])[0]);
         }
     }
-    console.log("Lemma list");
-    console.log(lemmalist);
     return lemmalist;
 }
 
@@ -129,58 +125,49 @@ function getObjectKeysAlphabetical(obj) // Function pulled from https://stackove
 var word_frequency = {}; // For Word Frequency file
 var postings = {}; // For Postings List file
 var p_dict = {};
-
 for (var y = 0; y < files.length; y++)
 {
-    fs.readFile(directory_name + files[y], function (err, buf) {
-        var json_string = "";
-        if (err) {
-            return console.error(err);
-        }
-        json_string += buf.toString();
-        const obj = JSON.parse(json_string);
-        for (var key in obj) {
-            var value = obj[key];
-            var q_title = value[0];
-            token_list = JSTokenize(q_title);
-            lemma_list = lemmatizetokens(token_list);
-            var q_dict = {};
-            for (var word in lemma_list) { // ISSUES WITH FILE CONSTRUCTION
-                if (!(word in q_dict)) {
+    const buf = fs.readFileSync(directory_name + files[y]);
+    var json_string = "";
+    json_string += buf.toString();
+    const obj = JSON.parse(json_string);
+    for (var key in obj) {
+        var value = obj[key];
+        var q_title = value[0];
+        token_list = JSTokenize(q_title);
+        lemma_list = lemmatizetokens(token_list);
+        var q_dict = {};
+        for (var word in lemma_list) {
+            if (lemma_list[word] !== undefined)
+            {
+                if (q_dict.hasOwnProperty(lemma_list[word]) == false) { // Word Frequency section
                     q_dict[lemma_list[word]] = 1;
                 }
                 else {
                     q_dict[lemma_list[word]] += 1;
                 }
 
-                if (!(word in p_dict)) {
+                if (p_dict.hasOwnProperty(lemma_list[word]) == false) { // Postings List section
                     p_dict[lemma_list[word]] = new Set();
                     p_dict[lemma_list[word]].add(key);
                 }
                 else {
                     p_dict[lemma_list[word]].add(key);
                 }
-                console.log("p_dict");
-                console.log(p_dict);
             }
-            word_frequency[key] = q_dict;
-            //console.log(word_frequency);
         }
-    });
+        word_frequency[key] = q_dict;
+    }
 }
 
 var json_string2 = JSON.stringify(word_frequency);
-fs.writeFile("JSWord_Frequency.json", json_string2, function (err) {
-    if (err) throw err;
-});
+fs.writeFileSync("JSWord_Frequency.json", json_string2);
 
 var keys = getObjectKeysAlphabetical(p_dict);
 for (var key in keys) {
-    var value = p_dict[key];
-    postings[key] = Array.from(value);
+    var value = p_dict[keys[key]];
+    postings[keys[key]] = Array.from(value);
 }
 
 var json_string3 = JSON.stringify(postings);
-fs.writeFile("JSPostings_List.json", json_string3, function (err) {
-    if (err) throw err;
-});
+fs.writeFileSync("JSPostings_List.json", json_string3);
