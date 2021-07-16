@@ -3,6 +3,7 @@
 
 <!DOCTYPE html>
 <script src="./js_dictionaries/questions/questions.js"></script>
+<script src="./js_dictionaries/answers/answers.js"></script>
 
 <script defer>
 
@@ -41,20 +42,18 @@ for (var i = 0; i < id_list.length; i++)
     </body>
 
 <script>
-buildTable(id_list);
+buildQuestions(id_list);
 
-function buildTable(data) 
+function buildQuestions(data) 
 {
     var results = document.getElementById('results')
     
     // based on the id, % 50 to find the file index
-    // var file_index = ; 
 
     for (var i = 0; i < data.length*3; i += 3) 
     {
 
         var a = "questions_dict[1]"
-        // console.log(questions_dict[1])
 
         var row =  `<div class="parent-tab tab-${i}}">
         <input type="radio" name="tab" id="tab-${i}">
@@ -62,34 +61,9 @@ function buildTable(data)
             <span id="question-title-${i/3}">${a}</span>
             <div class="icon"><i class="fas fa-plus"></i></div>
         </label>
-
-        <div class="content">
-            <div class="child-tab">
-                <input type="checkbox" name="sub-tab" id="tab-${i+1}">
-                <label for="tab-${i+1}">
-                    <span>Sub Heading Something</span>
-                    <div class="icon"><i class="fas fa-plus"></i></div>
-                </label>
-
-                <div class="sub-content">
-                    <p>True to Caesar</p>
-                </div>
-            </div>
-
-            <div class="child-tab">
-                <input type="checkbox" name="sub-tab" id="tab-${i+2}">
-                <label for="tab-${i+2}">
-                    <span>Sub Heading Something</span>
-                    <div class="icon"><i class="fas fa-plus"></i></div>
-                </label>
-
-                <div class="sub-content">
-                    <p>Patrolling the Mojave makes you wish for a nuclear winter.</p>
-                </div>
-            </div>
-        </div>
         `;
 
+        
 
         results.innerHTML += row;
 
