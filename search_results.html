@@ -4,25 +4,7 @@
 <!DOCTYPE html>
 <script src="./js_dictionaries/questions/questions.js"></script>
 <script src="./js_dictionaries/answers/answers.js"></script>
-
-<script defer>
-
-var id_list = [1, 2, 3, 4, 100]
-var script_obj_list = []
-var script_list = []
-
-for (var i = 0; i < id_list.length; i++) 
-{
-    const script = document.createElement("script");
-    script.src = './js_dictionaries/questions/questions.js'
-    script.type = "text/javascript";
-    script.defer = true;
-
-    script_list.push(script);
-
-    script_obj_list.push(document.head.appendChild(script));
-}
-</script>
+<script src="./js_dictionaries/questions_to_answers.js"></script>
 
 <html lang='en' dir='ltr'>
     <head>
@@ -42,41 +24,69 @@ for (var i = 0; i < id_list.length; i++)
     </body>
 
 <script>
+var id_list = [1, 2, 3, 4, 100]
+
 buildQuestions(id_list);
 
 function buildQuestions(data) 
 {
+    // data is the list of q_ids sent from an external JS script
     var results = document.getElementById('results')
     
     // based on the id, % 50 to find the file index
 
-    for (var i = 0; i < data.length*3; i += 3) 
+    
+
+    for (var i = 0; i < data.length; i++) 
     {
 
         var a = "questions_dict[1]"
 
-        var row =  `<div class="parent-tab tab-${i}}">
+        let row =  `<div class="parent-tab tab-${i}}">
         <input type="radio" name="tab" id="tab-${i}">
         <label for="tab-${i}" class="tab-${i}">
-            <span id="question-title-${i/3}">${a}</span>
+            <span id="question-title-${i}">${a}</span>
             <div class="icon"><i class="fas fa-plus"></i></div>
         </label>
+
+        <div class="content>"
         `;
 
-        
+        row = [row, '>'].join("")
+
+        if (data[i] in questions_answers_dict) {
+            for (var j = 0; j < questions_answers_dict[data[i]].length ; j++) 
+            {
+                var a_id = questions_answers_dict[data[i]][j]
+
+                // console.log(a_id)
+
+                row = [row, `
+                    <div class="child-tab">
+                        <input type="checkbox" name="sub-tab" id=answer-${a_id}>
+                        <label for="answers-${a_id}">
+                            <span>Answer</span>
+                            <div class="icon"><i class="fas fa-plus"></i></div>
+                        </label>
+
+                        <div class="sub-content">
+                            <p>${answers_dict[a_id][0]}</p>
+                        </div>
+                `].join("")
+
+                // console.log(row);
+            }
+        }
+
+        row = [row, `\n</div>`].join("");
+
+        console.log(row);
 
         results.innerHTML += row;
 
         // var obj = document.head.appendChild(script_list[i/3]);
-
-        // console.log(questions_dict);
         
-        document.getElementById("question-title-" + (i/3)).innerText = questions_dict[data[i/3]][0]
-
-        // script_list[i/3].remove(obj)
-        // script_obj_list.shift().remove(script_list.shift()) // Get the first element of script_obj_list
-
-        console.log(script_obj_list);
+        document.getElementById("question-title-" + (i)).innerText = questions_dict[data[i]][0]
     }
 }
 </script>

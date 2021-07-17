@@ -108,8 +108,8 @@ body
     content: '\f068';
 }
 
-.wrapper .parent-tab .content,
-.wrapper .child-tab .sub-content 
+.wrapper .parent-tab .content
+/* .wrapper .child-tab .sub-content  */
 {
     max-height: 0px;
     overflow: hidden;
