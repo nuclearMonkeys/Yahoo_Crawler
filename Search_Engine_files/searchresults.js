@@ -132,17 +132,17 @@ function mainSearch(query) // Parsing through the main query and giving a list o
         {
             for (var x in qs)
             {
-                words = wordfreq[qs[x]];
+                var words = wordfreq[qs[x]];
                 if (words != undefined)
                 {
-                    question_dict = {"qid": qs[x]};
-                    query_num = words[lemmaquery[0]];
+                    var question_dict = {"qid": qs[x]};
+                    var query_num = words[lemmaquery[0]];
                     question_dict["query"] = query_num;
                     questionlist.push(question_dict);
                 }
             }
             questionlist.sort(sortByKeyNumbers1);
-            final_quest = [];
+            var final_quest = [];
             for (var qt in questionlist)
             {
                 current_qid = questionlist[qt].qid;
@@ -154,7 +154,23 @@ function mainSearch(query) // Parsing through the main query and giving a list o
     else if (lemmaquery.length < 1)
     {
         // For parsing through multiple word queries
-        query_list = [];
+        // return questionlist;
+        var temp_questions = Set();
+        for (var index in lemmaquery)
+        {
+            qs2 = postings[lemmaquery[index]];
+            if (qs2 != undefined)
+            {
+                for (var y in qs2)
+                {
+                    var words = wordfreq[qs2[y]];
+                    if (words != undefined)
+                    {
+                        // Find a way to add to the set for easy sorting later on.
+                    }
+                }
+            }
+        }
     }
 }
 
