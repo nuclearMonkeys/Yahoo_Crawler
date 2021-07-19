@@ -1,28 +1,61 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-.search-btn 
+body 
 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 60px;
-    width: 60px;
-    line-height: 60px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.wrapper 
+{
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.wrapper h1 
+{
+    display: flex;
+    font-size: 48px;
+}
+
+.wrapper .parent-tab 
+{
+    margin-bottom: 8px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.18);
+}
+
+.wrapper .parent-tab label
+{
+    color: #000;
+    font-size: 48;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     cursor: pointer;
-    border-radius: 50%;
-    background: linear-gradient(-135deg, #c850c0, #4158d0);
+    border-radius: 3px;
+    position: relative;
+    z-index: 99;
+    transition: all 0.3s ease;
 }
 
-.search-btn span 
+.wrapper label span 
 {
-    color: #fff;
-    font-size: 22px;
-    line-height: 60px;
+    color: rgb(0, 38, 255);
+    font-size: 24px;
+}
+
+.wrapper .sub-content p 
+{
+    padding: 15px 20px;
+    font-size: 16px;
 }
