@@ -89,18 +89,57 @@ function lemmatizetokens(tokenlist) {
     return lemmalist;
 }
 
+function sortByKeyNumbers(listdict, mode)
+{
+    // Sorts the list of dictionaries by their highest numbers
+}
+
 function mainSearch(query) // Parsing through the main query and giving a list of results.
 {
     tokenquery = JSTokenize(query);
     lemmaquery = lemmatizetokens(tokenquery);
+    const post = fs.readFileSync("JSPostings_List.json");
+    const wordi = fs.readFileSync("JSWord_Frequency.json");
+    var json_str1 = "";
+    var json_str2 = "";
+    jsonstr1 += post.toString();
+    jsonstr2 += wordi.toString();
+
+    const postings = JSON.parse(jsonstr1);
+    const wordfreq = JSON.parse(jsonstr2);
+
+    var questionlist = [];
     if (lemmaquery.length == 0)
     {
-        var arr = [];
-        return arr;
+        // For empty queries
+        return questionlist;
     }
     else if (lemmaquery.length == 1)
     {
         // For parsing through single word queries
+        qs = postings[lemmaquery[0]];
+        if (qs != undefined)
+        {
+            for (var x in qs)
+            {
+                words = wordfreq[qs[x]];
+                if (words != undefined)
+                {
+                    question_dict = {"qid": qs[x]};
+                    query_num = words[lemmaquery[0]];
+                    question_dict[lemmaquery[0]] = query_num;
+                    question_list.push(question_dict);
+                }
+            }
+            questions = sortByKeyNumbers(questionlist);
+            final_quest = [];
+            for (var q in questions)
+            {
+                current_qid = questions[q].qid;
+                final_quest.push(current_qid);
+            }
+            return final_quest;
+        }
     }
     else if (lemmaquery.length < 1)
     {
