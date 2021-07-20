@@ -28,9 +28,12 @@ body
 
 .wrapper .parent-tab 
 {
+    float: left;
     margin-bottom: 8px;
     border-radius: 3px;
     box-shadow: 0px 0px 15px rgba(0,0,0,0.18);
+    position: relative;
+    z-index: 9999;
 }
 
 .wrapper .parent-tab label
@@ -44,7 +47,6 @@ body
     cursor: pointer;
     border-radius: 3px;
     position: relative;
-    z-index: 99;
     transition: all 0.3s ease;
 }
 
@@ -54,8 +56,29 @@ body
     font-size: 24px;
 }
 
-.wrapper .sub-content p 
+.wrapper .parent-tab .sub-content p 
 {
     padding: 15px 20px;
-    font-size: 16px;
+    font-size: 14px;
+}
+
+.wrapper .parent-tab .sub-content .left
+{
+    float: left;
+    width: 60%;
+    z-index: 9999;
+}
+
+.wrapper .parent-tab .sub-content .middle
+{
+    float: right;
+    width: 20%;
+    z-index: 9999;
+}
+
+.wrapper .parent-tab .sub-content .right
+{
+    float: right;
+    width: 20%;
+    z-index: 9999;
 }
