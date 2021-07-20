@@ -4,6 +4,7 @@
 var lemmatizer = require("javascript-lemmatizer/js/lemmatizer.js");
 var posTagger = require("wink-pos-tagger/src/wink-pos-tagger.js");
 var fs = require("fs");
+const { questions } = require("wink-lexicon/src/lexicon");
 
 var stopWords = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
     'v', 'w', 'x', 'y', 'z', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', "another", 'and', 'any',
@@ -89,9 +90,18 @@ function lemmatizetokens(tokenlist) {
     return lemmalist;
 }
 
-function sortByKeyNumbers(listdict, mode)
+function sortByKeyNumbers1(a, b)
 {
     // Sorts the list of dictionaries by their highest numbers
+    if (a.query < b.query)
+    {
+        return 1;
+    }
+    if (a.query > b.query)
+    {
+        return -1;
+    }
+    return 0;
 }
 
 function mainSearch(query) // Parsing through the main query and giving a list of results.
@@ -102,11 +112,11 @@ function mainSearch(query) // Parsing through the main query and giving a list o
     const wordi = fs.readFileSync("JSWord_Frequency.json");
     var json_str1 = "";
     var json_str2 = "";
-    jsonstr1 += post.toString();
-    jsonstr2 += wordi.toString();
+    json_str1 += post.toString();
+    json_str2 += wordi.toString();
 
-    const postings = JSON.parse(jsonstr1);
-    const wordfreq = JSON.parse(jsonstr2);
+    const postings = JSON.parse(json_str1);
+    const wordfreq = JSON.parse(json_str2);
 
     var questionlist = [];
     if (lemmaquery.length == 0)
@@ -122,20 +132,20 @@ function mainSearch(query) // Parsing through the main query and giving a list o
         {
             for (var x in qs)
             {
-                words = wordfreq[qs[x]];
+                var words = wordfreq[qs[x]];
                 if (words != undefined)
                 {
-                    question_dict = {"qid": qs[x]};
-                    query_num = words[lemmaquery[0]];
-                    question_dict[lemmaquery[0]] = query_num;
-                    question_list.push(question_dict);
+                    var question_dict = {"qid": qs[x]};
+                    var query_num = words[lemmaquery[0]];
+                    question_dict["query"] = query_num;
+                    questionlist.push(question_dict);
                 }
             }
-            questions = sortByKeyNumbers(questionlist);
-            final_quest = [];
-            for (var q in questions)
+            questionlist.sort(sortByKeyNumbers1);
+            var final_quest = [];
+            for (var qt in questionlist)
             {
-                current_qid = questions[q].qid;
+                current_qid = questionlist[qt].qid;
                 final_quest.push(current_qid);
             }
             return final_quest;
@@ -144,5 +154,25 @@ function mainSearch(query) // Parsing through the main query and giving a list o
     else if (lemmaquery.length < 1)
     {
         // For parsing through multiple word queries
+        // return questionlist;
+        var temp_questions = Set();
+        for (var index in lemmaquery)
+        {
+            qs2 = postings[lemmaquery[index]];
+            if (qs2 != undefined)
+            {
+                for (var y in qs2)
+                {
+                    var words = wordfreq[qs2[y]];
+                    if (words != undefined)
+                    {
+                        // Find a way to add to the set for easy sorting later on.
+                    }
+                }
+            }
+        }
     }
 }
+
+results = mainSearch("Trump");
+console.log(results);
