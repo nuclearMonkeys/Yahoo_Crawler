@@ -2,9 +2,11 @@
 <!-- https://www.codingnepalweb.com/responsive-accordion-menu-html-css/  -->
 
 <!DOCTYPE html>
+<!-- <script src="./Search_Engine_files/searchresults_copy.js"></script> -->
 <script src="./js_dictionaries/questions/questions.js"></script>
 <script src="./js_dictionaries/answers/answers.js"></script>
 <script src="./js_dictionaries/questions_to_answers.js"></script>
+<script src="./Search_Engine_files/bundle.js"></script>
 
 <html lang='en' dir='ltr'>
     <head>
@@ -78,8 +80,6 @@ function buildQuestions(data)
         }
 
         row = [row, `\n</div>`].join("");
-
-        console.log(row);
 
         results.innerHTML += row;
 
