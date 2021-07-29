@@ -8,8 +8,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     </head>
 
-    
-
     <body>
         <div class="wrapper" id="questions-results">
             <h1>Top Results</h1>
@@ -48,4 +46,23 @@
             </div>
         </div>
     </body>
+
+<script>
+var id_list = [1,2016,158,1000,100]
+
+function buildQuestions(data) 
+{
+    var results = document.getElementById("questions-results");
+
+    for (var i = 0; i < data.length; i++) 
+    {
+        var a = "blank";
+
+        let row = `<div class="parent-tab id="tab-${i}">
+            <label for="tab-${i}">
+            <label>`
+            
+    }
+}
+</script>
 </html>
