@@ -2,9 +2,16 @@
 // Derek Morales derekm2@uci.edu
 
 var lemmatizer = require("javascript-lemmatizer/js/lemmatizer.js");
-var posTagger = require("wink-pos-tagger/src/wink-pos-tagger.js");
+//var posTagger = require("wink-pos-tagger/src/wink-pos-tagger.js");
+var natural = require('natural');
 var fs = require("fs");
-const { questions } = require("wink-lexicon/src/lexicon");
+
+const language = "EN";
+const defaultCategory = 'N';
+const defaultCategoryCapitalized = 'NNP';
+var lexicon = new natural.Lexicon(language, defaultCategory, defaultCategoryCapitalized);
+var ruleSet = new natural.RuleSet('EN');
+//const { questions } = require("wink-lexicon/src/lexicon");
 
 var stopWords = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
     'v', 'w', 'x', 'y', 'z', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', "another", 'and', 'any',
@@ -51,34 +58,52 @@ function JSTokenize(text) {
     return tokenlist;
 }
 
-function convertPOSList(POSList) {
-    for (var x = 0; x < POSList.length; x++) {
-        speech = POSList[x].pos;
+function convertPOSList(POSListTemp) {
+    var POSList = [];
+    var verb = "verb";
+    var noun = "noun";
+    var adj = "adj";
+    var adv = "adv";
+    for (var x = 0; x < POSListTemp.taggedWords.length; x++) {
+        speech = POSListTemp.taggedWords[x].tag;
         if (speech[0] == "V") {
-            POSList[x] = "verb";
+            POSList.push(verb);
         }
         else if ((speech[0] == "N") || (speech == "CD")) {
-            POSList[x] = "noun";
+            POSList.push(noun);
         }
         else if (speech[0] == "J") {
-            POSList[x] = "adj";
+            POSList.push(adj);
         }
         else if (speech[0] == "R") {
-            POSList[x] = "adv";
+            POSList.push(adv);
+        }
+        else
+        {
+            POSList[x] = undefined;
         }
     }
     return POSList;
 }
 
 function lemmatizetokens(tokenlist) {
-    var tagger = posTagger();
-    POSListTemp = tagger.tagRawTokens(tokenlist);
-    POSList = convertPOSList(POSListTemp);
+    // Adjusted version of lemmatizetokens that does not use Node.js
+
+    //var tagger = posTagger();
+    //POSListTemp = tagger.tagRawTokens(tokenlist);
+    //POSList = convertPOSList(POSListTemp);
     ///console.log(POSList);
+
+    var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+    POSListTemp = tagger.tag(tokenlist);
+    // Not sure how this POSList is formatted now. Should check later. Possible issues with
+    // languages later too. Maybe not if we use the stemmer.
+    POSList = convertPOSList(POSListTemp);
+
     var lemma = new lemmatizer();
     var lemmalist = [];
     for (var y = 0; y < tokenlist.length; y++) {
-        if (typeof POSList[y] == "object")
+        if (typeof POSList[y] == undefined)
         {
             lemmalist.push(lemma.only_lemmas(tokenlist[y])[0]);
         }
@@ -167,6 +192,7 @@ function mainSearch(query) // Parsing through the main query and giving a list o
                     if (words != undefined)
                     {
                         // Find a way to add to the set for easy sorting later on.
+                        // JUST ADD UP THE WORD FREQUENCIES STUPID
                     }
                 }
             }
