@@ -5,13 +5,14 @@
         <title>Yahoo Answers Search Box</title>
         <link rel="stylesheet" href="test_style.css">
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="./js_dictionaries/questions/questions.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     </head>
 
     <body>
         <div class="wrapper" id="questions-results">
             <h1>Top Results</h1>
-            <div class="parent-tab" id="tab-1">
+            <!-- <div class="parent-tab" id="tab-1">
                 <label for="tab-1" class="tab-1">
                     <span>Nintendo</span>
                 </label>
@@ -26,7 +27,7 @@
                         <p id="num-of-lkes">likes: 6</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="parent-tab" id="tab-2">
                 <label for="tab-2" class="tab-2">
@@ -48,7 +49,9 @@
     </body>
 
 <script>
-var id_list = [1,2016,158,1000,100]
+var id_list = [1, 15, 158]
+
+buildQuestions(id_list);
 
 function buildQuestions(data) 
 {
@@ -56,11 +59,35 @@ function buildQuestions(data)
 
     for (var i = 0; i < data.length; i++) 
     {
-        var a = "blank";
+        var q_id = data[i];
+        var question_title = questions_dict[q_id][0];
+        // NOTE: I forgot to put the question description to the questions.js file
+        // I also noticed that the majority of the questions left the description
+        // (questiontext) null so idk if we need to put that here at all.
+        // For now, I'm just gonna copy the question's title as a description.
+        var question_description = questions_dict[q_id][0];
+        var num_of_answers = questions_dict[q_id][1];
+        var num_of_likes = questions_dict[q_id][3];
 
         let row = `<div class="parent-tab id="tab-${i}">
             <label for="tab-${i}">
-            <label>`
+                <span>${question_title}</span>
+            </label>
+            <div class="sub-content">
+                <div class="left">
+                        <p id="description">${question_description}</p>
+                    </div>
+                    <div class="middle">
+                        <p id="num-of-answers">answers: ${num_of_answers}</p>
+                    </div>
+                    <div class="right">
+                        <p id="num-of-lkes">likes: ${num_of_likes}</p>
+                    </div>
+                </div>
+            </div>
+        </div>`
+
+        results.innerHTML += row;
             
     }
 }

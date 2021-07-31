@@ -65,7 +65,8 @@ body
 .wrapper .parent-tab .sub-content .left
 {
     float: left;
-    width: 60%;
+    width: 80%;
+    min-width: 575px;
     z-index: 9999;
 }
 
@@ -73,6 +74,7 @@ body
 {
     float: right;
     width: 20%;
+    min-width: 100px;
     z-index: 9999;
 }
 
