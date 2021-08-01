@@ -91,7 +91,7 @@ body
 .wrapper .answer label
 {
     color: rgb(0, 38, 255);
-    display: inline-block;
+    display: flex;
     /* float: left; */
     font-size: 24px;
     /* min-width: 500px; */
@@ -99,6 +99,12 @@ body
     position: relative;
     transition: all 0.3 ease;
     width: 225px;
+}
+
+.wrapper .answer label span 
+{
+    color: rgb(0, 38, 255);
+    font-size: 24px;
 }
 
 .wrapper .answer .description 
