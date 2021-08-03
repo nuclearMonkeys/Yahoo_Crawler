@@ -7,6 +7,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="./js_dictionaries/questions/questions.js"></script>
         <script src="./js_dictionaries/answers/answers.js"></script>
+        <script src="./js_dictionaries/users/users.js"></script>
         <script src="./js_dictionaries/questions_to_answers.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     </head>
@@ -85,12 +86,18 @@ function buildAnswers(data)
         // console.log(a_id);
         var answer_description = answers_dict[a_id][0];
         var answers_num_of_likes = answers_dict[a_id][1];
-        var answers_user_id = answers_dict[a_id][2];
-        console.log(answers_dict[a_id]);
+        var user_id = answers_dict[a_id][2];
+        var user_name = users_dict[user_id]
+        console.log(user_name)
+
+        if (user_name == "None") 
+        {
+            user_name = "Anonymous"
+        }
 
         row = `<div class="answer" id="answer-${a_id}">
                 <label for="answer-${a_id}">
-                    <span>Mr. Effect</span>
+                    <span>${user_name}</span>
                 </label>
 
                 <div class="description" id="description-${a_id}">
