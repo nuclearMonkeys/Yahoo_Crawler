@@ -9,12 +9,36 @@ import ast # This is for the user of literal eval
 # commented and uncommented
 
 if __name__ == '__main__':
-    path = "./js_directionaries/users"
+    path = "./js_dictionaries/users"
 
-    file = open(path + "/users.js", 'r')
+    filenames = os.listdir(path)
 
-    file.close()
+    filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
 
+    revised_file = open(path + "/" + "users.js", 'w')
+    revised_file.write("var users_dict = {\n")
+
+    for filename in filenames:
+        file = open(path + "/" + filename, 'r')
+
+        rows = file.readlines()
+
+        rows.pop(0)
+        rows.pop(-1)
+
+        for row in rows:
+            revised_file.write(row)
+
+        file.close()
+
+    revised_file.write("}\n")
+    revised_file.close()
+
+    # file = open(path + "/users.js", 'w')
+
+    # file.close()
+
+    ######################################################################
     # path = "./js_dictionaries/answers"
 
     # file = open(path + "/answers.js", 'r')
