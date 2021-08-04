@@ -2,16 +2,16 @@
 // Derek Morales derekm2@uci.edu
 
 var lemmatizer = require("javascript-lemmatizer/js/lemmatizer.js");
-//var posTagger = require("wink-pos-tagger/src/wink-pos-tagger.js");
-var natural = require('natural');
+var posTagger = require("wink-pos-tagger/src/wink-pos-tagger.js");
+//var natural = require('natural');
 var fs = require("fs");
 
-const language = "EN";
-const defaultCategory = 'N';
-const defaultCategoryCapitalized = 'NNP';
-var lexicon = new natural.Lexicon(language, defaultCategory, defaultCategoryCapitalized);
-var ruleSet = new natural.RuleSet('EN');
-//const { questions } = require("wink-lexicon/src/lexicon");
+//const language = "EN";
+//const defaultCategory = 'N';
+//const defaultCategoryCapitalized = 'NNP';
+//var lexicon = new natural.Lexicon(language, defaultCategory, defaultCategoryCapitalized);
+//var ruleSet = new natural.RuleSet('EN');
+const { questions } = require("wink-lexicon/src/lexicon");
 
 var stopWords = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
     'v', 'w', 'x', 'y', 'z', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', "another", 'and', 'any',
@@ -58,29 +58,20 @@ function JSTokenize(text) {
     return tokenlist;
 }
 
-function convertPOSList(POSListTemp) {
-    var POSList = [];
-    var verb = "verb";
-    var noun = "noun";
-    var adj = "adj";
-    var adv = "adv";
-    for (var x = 0; x < POSListTemp.taggedWords.length; x++) {
-        speech = POSListTemp.taggedWords[x].tag;
+function convertPOSList(POSList) {
+    for (var x = 0; x < POSList.length; x++) {
+        speech = POSList[x].pos;
         if (speech[0] == "V") {
-            POSList.push(verb);
+            POSList[x] = "verb";
         }
         else if ((speech[0] == "N") || (speech == "CD")) {
-            POSList.push(noun);
+            POSList[x] = "noun";
         }
         else if (speech[0] == "J") {
-            POSList.push(adj);
+            POSList[x] = "adj";
         }
         else if (speech[0] == "R") {
-            POSList.push(adv);
-        }
-        else
-        {
-            POSList[x] = undefined;
+            POSList[x] = "adv";
         }
     }
     return POSList;
@@ -89,21 +80,21 @@ function convertPOSList(POSListTemp) {
 function lemmatizetokens(tokenlist) {
     // Adjusted version of lemmatizetokens that does not use Node.js
 
-    //var tagger = posTagger();
-    //POSListTemp = tagger.tagRawTokens(tokenlist);
-    //POSList = convertPOSList(POSListTemp);
-    ///console.log(POSList);
+    var tagger = posTagger();
+    POSListTemp = tagger.tagRawTokens(tokenlist);
+    POSList = convertPOSList(POSListTemp);
+    //console.log(POSList);
 
-    var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
-    POSListTemp = tagger.tag(tokenlist);
+    //var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+    //POSListTemp = tagger.tag(tokenlist);
     // Not sure how this POSList is formatted now. Should check later. Possible issues with
     // languages later too. Maybe not if we use the stemmer.
-    POSList = convertPOSList(POSListTemp);
+    //POSList = convertPOSList(POSListTemp);
 
     var lemma = new lemmatizer();
     var lemmalist = [];
     for (var y = 0; y < tokenlist.length; y++) {
-        if (typeof POSList[y] == undefined)
+        if (typeof POSList[y] == "object")
         {
             lemmalist.push(lemma.only_lemmas(tokenlist[y])[0]);
         }
@@ -127,6 +118,37 @@ function sortByKeyNumbers1(a, b)
         return -1;
     }
     return 0;
+}
+
+function sortByKeyNumbers2(a, b)
+{
+    // Not sure yet how this function will work. Probably with the aggregate word frequencies.
+    //zero_a = numberofZeros(a.query);
+    //zero_b = numberofZeros(b.query);
+    sum_a = a.query.reduce((a, b) => a + b, 0);
+    sum_b = b.query.reduce((a, b) => a + b, 0);
+    if (sum_a < sum_b)
+    {
+        return 1;
+    }
+    if (sum_a > sum_b)
+    {
+        return -1;
+    }
+    return 0;
+}
+
+function numberofZeros(quest_list)
+{
+    var counter = 0;
+    for (var item = 0; item < quest_list.length; item++)
+    {
+        if (quest_list[item] == 0)
+        {
+            counter++;
+        }
+    }
+    return counter;
 }
 
 function mainSearch(query) // Parsing through the main query and giving a list of results.
@@ -167,6 +189,7 @@ function mainSearch(query) // Parsing through the main query and giving a list o
                 }
             }
             questionlist.sort(sortByKeyNumbers1);
+            //console.log(questionlist);
             var final_quest = [];
             for (var qt in questionlist)
             {
@@ -176,11 +199,11 @@ function mainSearch(query) // Parsing through the main query and giving a list o
             return final_quest;
         }
     }
-    else if (lemmaquery.length < 1)
+    else if (lemmaquery.length > 1)
     {
         // For parsing through multiple word queries
         // return questionlist;
-        var temp_questions = Set();
+        var temp_questions = new Set();
         for (var index in lemmaquery)
         {
             qs2 = postings[lemmaquery[index]];
@@ -191,14 +214,40 @@ function mainSearch(query) // Parsing through the main query and giving a list o
                     var words = wordfreq[qs2[y]];
                     if (words != undefined)
                     {
+                        var question_dict = {"qid": qs2[y]};
+                        var query_arr = new Array(lemmaquery.length);
+                        for (var ind in lemmaquery)
+                        {
+                            var query_num = words[lemmaquery[ind]];
+                            if (query_num == undefined)
+                            {
+                                query_arr[ind] = 0;
+                            }
+                            else
+                            {
+                                query_arr[ind] = query_num;
+                            }
+                        }
+                        question_dict["query"] = query_arr;
+                        temp_questions.add(question_dict);
                         // Find a way to add to the set for easy sorting later on.
                         // JUST ADD UP THE WORD FREQUENCIES STUPID
                     }
                 }
             }
         }
+        questionlist = Array.from(temp_questions);
+        questionlist.sort(sortByKeyNumbers2);
+        //console.log(questionlist);
+        var final_quest = [];
+        for (var qt in questionlist)
+        {
+            current_qid = questionlist[qt].qid;
+            final_quest.push(current_qid);
+        }
+        return final_quest;
     }
 }
 
-results = mainSearch("Trump");
+results = mainSearch("Trump lost");
 console.log(results);
