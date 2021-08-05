@@ -125,13 +125,13 @@ function sortByKeyNumbers2(a, b)
     // Not sure yet how this function will work. Probably with the aggregate word frequencies.
     //zero_a = numberofZeros(a.query);
     //zero_b = numberofZeros(b.query);
-    sum_a = a.query.reduce((a, b) => a + b, 0);
-    sum_b = b.query.reduce((a, b) => a + b, 0);
-    if (sum_a < sum_b)
+    //sum_a = a.query.reduce((a, b) => a + b, 0);
+    //sum_b = b.query.reduce((a, b) => a + b, 0);
+    if (a.query.length < b.query.length)
     {
         return 1;
     }
-    if (sum_a > sum_b)
+    if (a.query.length > b.query.length)
     {
         return -1;
     }
@@ -215,17 +215,14 @@ function mainSearch(query) // Parsing through the main query and giving a list o
                     if (words != undefined)
                     {
                         var question_dict = {"qid": qs2[y]};
-                        var query_arr = new Array(lemmaquery.length);
+                        //var query_arr = new Array(lemmaquery.length);
+                        var query_arr = [];
                         for (var ind in lemmaquery)
                         {
                             var query_num = words[lemmaquery[ind]];
-                            if (query_num == undefined)
+                            if (query_num != undefined)
                             {
-                                query_arr[ind] = 0;
-                            }
-                            else
-                            {
-                                query_arr[ind] = query_num;
+                                query_arr.push(query_num);
                             }
                         }
                         question_dict["query"] = query_arr;
@@ -238,7 +235,7 @@ function mainSearch(query) // Parsing through the main query and giving a list o
         }
         questionlist = Array.from(temp_questions);
         questionlist.sort(sortByKeyNumbers2);
-        //console.log(questionlist);
+        console.log(questionlist);
         var final_quest = [];
         for (var qt in questionlist)
         {
