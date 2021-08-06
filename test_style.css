@@ -14,6 +14,11 @@ body
     min-height: 100vh;
 }
 
+.animated 
+{
+    
+}
+
 .wrapper 
 {
     max-width: 800px;
