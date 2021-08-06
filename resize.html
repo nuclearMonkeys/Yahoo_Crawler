@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        #YA
+        {
+            width: 120px;
+            height: 61px;
+            position: relative;
+            animation-name: ya-grow;
+            animation-duration: 3s;
+            animation-delay: 2s;
+        }
+
+        #HOO
+        {
+            width: 180px;
+            height: 61px;
+            position: relative;
+            animation-name: hoo-grow;
+            animation-duration: 2s;
+            animation-delay: 3s;
+        }
+
+        #EX_MARK
+        {
+            width: 18px;
+            height: 61px;
+            position: relative;
+            animation-name: ex-grow;
+            animation-duration: 4s;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes ya-grow
+        {
+            0% {width: 120px; height: 61px;}
+            50% {width: 240px; height: 122px;}
+            100% {width: 120px; height: 61px;}
+        }
+
+        @keyframes hoo-grow
+        {
+            0% {width: 180px; height: 61px;}
+            50% {width: 320px; height: 122px;}
+            100% {width: 180px; height: 61px;}
+        }
+
+        @keyframes ex-grow
+        {
+            0% {width: 18px; height: 61px;}
+            50% {width: 32px; height: 122px;}
+            100% {width: 18px; height: 61px;}
+        }
+        </style>
+    </head>
+    <body>
+        <!-- the YAHOO! logo is 1280x243 -->
+        <img id="YA" src="images/YA.png" width=120  height=61> 
+        <img id="HOO" src="images/HOO.png" width=180  height=61>
+        <img id="EX_MARK" src="images/EX_MARK.png" width=18  height=61>  
+    </body>
+</html>
