@@ -125,8 +125,8 @@ function sortByKeyNumbers2(a, b)
     // Not sure yet how this function will work. Probably with the aggregate word frequencies.
     //zero_a = numberofZeros(a.query);
     //zero_b = numberofZeros(b.query);
-    //sum_a = a.query.reduce((a, b) => a + b, 0);
-    //sum_b = b.query.reduce((a, b) => a + b, 0);
+    sum_a = a.query.reduce((a, b) => a + b, 0);
+    sum_b = b.query.reduce((a, b) => a + b, 0);
     if (a.query.length < b.query.length)
     {
         return 1;
@@ -234,8 +234,12 @@ function mainSearch(query) // Parsing through the main query and giving a list o
             }
         }
         questionlist = Array.from(temp_questions);
-        questionlist.sort(sortByKeyNumbers2);
-        console.log(questionlist);
+        questionlist.sort(
+            (q_a, q_b) =>
+                q_b.query.length - q_a.query.length ||
+                q_b.query.reduce((a, b) => a + b, 0) - q_a.query.reduce((a, b) => a + b, 0),
+        );
+        //console.log(questionlist);
         var final_quest = [];
         for (var qt in questionlist)
         {
@@ -246,5 +250,5 @@ function mainSearch(query) // Parsing through the main query and giving a list o
     }
 }
 
-results = mainSearch("Trump lost");
-console.log(results);
+//results = mainSearch("Trump lost");
+//console.log(results);
