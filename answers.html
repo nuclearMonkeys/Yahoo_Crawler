@@ -10,6 +10,7 @@
         <script src="./js_dictionaries/users/users.js"></script>
         <script src="./js_dictionaries/questions_to_answers.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
 
     <body>
@@ -61,18 +62,21 @@ function buildAnswers(data)
     var results = document.getElementById("results");
 
     // Get the question in first
-    var row = `<div class="questions" id="questions-tab">
-                <label for="questions-tab">
-                    <span>${question_title}</span>
-                </label>
+    var row = `
+            <div class="w3-container w3-center w3-animate-left">
+                <div class="questions" id="questions-tab">
+                    <label for="questions-tab">
+                        <span>${question_title}</span>
+                    </label>
 
-                <div class="description" id="description-1">
-                    <p id="question-description">${question_title}</p>
-                    <br></br>
-                </div>
-    
-                <div class="questions-likes">
-                    <p>likes: ${num_of_likes}</p>
+                    <div class="description" id="description-1">
+                        <p id="question-description">${question_title}</p>
+                        <br></br>
+                    </div>
+        
+                    <div class="questions-likes">
+                        <p>likes: ${num_of_likes}</p>
+                    </div>
                 </div>
             </div>`;
 
@@ -95,17 +99,19 @@ function buildAnswers(data)
             user_name = "Anonymous"
         }
 
-        row = `<div class="answer" id="answer-${a_id}">
-                <label for="answer-${a_id}">
-                    <span>${user_name}</span>
-                </label>
+        row = `<div class="w3-container w3-center w3-animate-left">
+                <div class="answer" id="answer-${a_id}">
+                    <label for="answer-${a_id}">
+                        <span>${user_name}</span>
+                    </label>
 
-                <div class="description" id="description-${a_id}">
-                    <p id="answer-description">${answer_description}</p>
-                    <br></br>
-                </div>
-                <div class="num-of-likes" id="answers-likes-${a_id}">
-                    <p>LIKES: ${answers_num_of_likes}</p>
+                    <div class="description" id="description-${a_id}">
+                        <p id="answer-description">${answer_description}</p>
+                        <br></br>
+                    </div>
+                    <div class="num-of-likes" id="answers-likes-${a_id}">
+                        <p>LIKES: ${answers_num_of_likes}</p>
+                    </div>
                 </div>
             </div>`;
 

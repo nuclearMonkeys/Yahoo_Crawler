@@ -7,6 +7,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="./js_dictionaries/questions/questions.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
 
     <body>
@@ -37,23 +38,25 @@ function buildQuestions(data)
         var num_of_answers = questions_dict[q_id][1];
         var num_of_likes = questions_dict[q_id][3];
 
-        let row = `<div class="parent-tab id="tab-${i}">
-            <label for="tab-${i}">
-                <span>${question_title}</span>
-            </label>
-            <div class="sub-content">
-                <div class="left">
-                        <p id="description">${question_description}</p>
-                    </div>
-                    <div class="middle">
-                        <p id="num-of-answers">answers: ${num_of_answers}</p>
-                    </div>
-                    <div class="right">
-                        <p id="num-of-lkes">likes: ${num_of_likes}</p>
+        let row = `<div class="w3-container w3-center w3-animate-left">
+            <div class="parent-tab id="tab-${i}">
+                <label for="tab-${i}">
+                    <span>${question_title}</span>
+                </label>
+                <div class="sub-content">
+                    <div class="left">
+                            <p id="description">${question_description}</p>
+                        </div>
+                        <div class="middle">
+                            <p id="num-of-answers">answers: ${num_of_answers}</p>
+                        </div>
+                        <div class="right">
+                            <p id="num-of-lkes">likes: ${num_of_likes}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>`
+        </div>`;
 
         results.innerHTML += row;
             
