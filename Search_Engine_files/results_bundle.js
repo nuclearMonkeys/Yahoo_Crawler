@@ -154,7 +154,7 @@ function numberofZeros(quest_list)
     return counter;
 }
 
-module.exports = function mainSearch(query) // Parsing through the main query and giving a list of results.
+function mainSearch(query) // Parsing through the main query and giving a list of results.
 {
     tokenquery = JSTokenize(query);
     lemmaquery = lemmatizetokens(tokenquery);
@@ -251,7 +251,9 @@ module.exports = function mainSearch(query) // Parsing through the main query an
         }
         return final_quest;
     }
-};
+}
+
+window.mainSearch = mainSearch;
 
 //results = mainSearch("Trump lost");
 //console.log(results);
