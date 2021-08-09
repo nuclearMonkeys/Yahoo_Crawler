@@ -1,4 +1,4 @@
-(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.SearchResults = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 
 },{}],2:[function(require,module,exports){
 // Search Results Module
@@ -154,12 +154,14 @@ function numberofZeros(quest_list)
     return counter;
 }
 
+module.exports = mainSearch;
+
 function mainSearch(query) // Parsing through the main query and giving a list of results.
 {
     tokenquery = JSTokenize(query);
     lemmaquery = lemmatizetokens(tokenquery);
-    const post = fs.readFileSync("JSPostings_List.json");
-    const wordi = fs.readFileSync("JSWord_Frequency.json");
+    const post = fs.readFileSync("Search_Engine_files/JSPostings_List.json");
+    const wordi = fs.readFileSync("Search_Engine_files/JSWord_Frequency.json");
     var json_str1 = "";
     var json_str2 = "";
     json_str1 += post.toString();
@@ -190672,4 +190674,5 @@ var tokenizer = function () {
 
 module.exports = tokenizer;
 
-},{"./eng-contractions.js":25,"emoji-regex":11}]},{},[2]);
+},{"./eng-contractions.js":25,"emoji-regex":11}]},{},[2])(2)
+});
