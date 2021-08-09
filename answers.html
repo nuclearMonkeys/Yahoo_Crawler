@@ -56,9 +56,12 @@ var question_description = questions_dict[q_id][0];
 var num_of_likes = questions_dict[q_id][3];
 var id_list = questions_answers_dict[q_id];
 
-buildAnswers(id_list)
+var current_index = id_list.length - 1;
 
-function buildAnswers(data) 
+// buildQuestion();
+buildAnswers(id_list);
+
+function buildQuestion() 
 {
     var results = document.getElementById("results");
 
@@ -79,18 +82,21 @@ function buildAnswers(data)
                 </div>`;
 
     results.innerHTML += row;
+}
 
-    // Get the answers
-    
-    for (var i = 0; i < data.length; i++) 
+function buildAnswers(data) {
+    console.log(current_index);
+
+    if (current_index < 0) return;
+
+    setTimeout( function() 
     {
-        var a_id = data[i];
+        var a_id = data[current_index];
         // console.log(a_id);
         var answer_description = answers_dict[a_id][0];
         var answers_num_of_likes = answers_dict[a_id][1];
         var user_id = answers_dict[a_id][2];
         var user_name = users_dict[user_id]
-        console.log(user_name)
 
         if (user_name == "None") 
         {
@@ -112,7 +118,45 @@ function buildAnswers(data)
                 </div>`;
 
         results.innerHTML += row;
-    }
+
+        current_index--;
+
+        buildAnswers(data);
+    }, 300) ;
+
+    // Get the answers
+    
+    // for (var i = 0; i < data.length; i++) 
+    // {
+    //     var a_id = data[i];
+    //     // console.log(a_id);
+    //     var answer_description = answers_dict[a_id][0];
+    //     var answers_num_of_likes = answers_dict[a_id][1];
+    //     var user_id = answers_dict[a_id][2];
+    //     var user_name = users_dict[user_id]
+    //     console.log(user_name)
+
+    //     if (user_name == "None") 
+    //     {
+    //         user_name = "Anonymous"
+    //     }
+
+    //     row = `<div class="answer w3-container w3-center w3-animate-left" id="answer-${a_id}">
+    //                 <label for="answer-${a_id}">
+    //                     <span>${user_name}</span>
+    //                 </label>
+
+    //                 <div class="description" id="description-${a_id}">
+    //                     <p id="answer-description">${answer_description}</p>
+    //                     <br></br>
+    //                 </div>
+    //                 <div class="num-of-likes" id="answers-likes-${a_id}">
+    //                     <p>LIKES: ${answers_num_of_likes}</p>
+    //                 </div>
+    //             </div>`;
+
+    //     results.innerHTML += row;
+    // }
 }
 </script>
 
