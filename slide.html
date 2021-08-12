@@ -4,15 +4,25 @@
     </head>
 
     <body>
-        <div id="slider" class="slide-in">
-            <ul>
-                <li>Lorem</li>
-                <li>Ipsum</li>
-                <li>Dolor</li>
-            </ul>
-        </div>
-        
-        <button id="toggle" style="position:absolute; top: 120px;">Toggle</button>
+        <div class="wrapper">
+            <div id="slider" class="slide-in">
+                <ul>
+                    <li>Lorem</li>
+                    <li>Ipsum</li>
+                    <li>Dolor</li>
+                </ul>
+            </div>
+
+            <div id="slide" class="slide-in">
+                <ul>
+                    <li>Lorem</li>
+                    <li>Ipsum</li>
+                    <li>Dolor</li>
+                </ul>
+            </div>
+            
+            <button id="toggle" style="position:absolute; top: 120px;">Toggle</button>
+        </div>>
     </body>
 
     <style>
@@ -21,6 +31,17 @@ position: absolute;
 width: 100px;
 height: 100px;
 background: blue;
+transform: translateX(-100%);
+-webkit-transform: translateX(-100%);
+}
+
+#slide {
+position: absolute;
+bottom: 150px;
+width: 100px;
+top: 120px;
+height: 100px;
+background: red;
 transform: translateX(-100%);
 -webkit-transform: translateX(-100%);
 }
@@ -55,7 +76,35 @@ animation: slide-out 0.5s forwards;
     </style>
 
     <script>
+        var results = document.getElementById("results");
+        var current_index = 0;
+
+        buildAnswer()
+
+        function buildAnswer() 
+        {
+            if (current_index > 2) return;
+
+            setTimeout(function() 
+            {
+                row = `<div id="slide-${current_index}" class="slide-in">
+                <ul>
+                    <li>Lorem</li>
+                    <li>Ipsum</li>
+                    <li>Dolor</li>
+                </ul>
+            </div>`
+
+            results.innerHTML += row;
+            
+            current_index++;
+            
+            buildAnswer();
+            }, 300);
+        }
+
         var $slider = document.getElementById('slider');
+        var $slide = document.getElementById('slide');
         var $toggle = document.getElementById('toggle');
 
         $toggle.addEventListener('click', function() {
