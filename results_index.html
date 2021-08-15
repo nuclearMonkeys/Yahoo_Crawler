@@ -306,7 +306,7 @@ function mainSearch(query) // Parsing through the main query and giving a list o
     }
 }
 
-window.mainSearch = mainSearch;
+//window.mainSearch = mainSearch;
 
 //results = mainSearch("Trump lost");
 //console.log(results);
@@ -188258,23 +188258,23 @@ module.exports = tokenizer;
 },{"./eng-contractions.js":23,"emoji-regex":11}]},{},[2])(2)
 });
 
-var results = mainSearch("Trump");
-buildPage(results);
+// var results = mainSearch("Trump");
+// buildPage(results);
 
-function buildPage(data)
-{
-    var element = document.getElementById("qid_results");
-    for (var x = 0; x < data.length; x++)
-    {
-        q_id = data[x];
-        var q_title = questions_dict[q_id];
-        let row = `<div class="parent-tab id="tab-${x}">
-            <label for="tab-${i}">
-                <span>${question_title}</span>
-            </label>
-        </div>`
-        element.innerHTML += row;
-    }
-}
+// function buildPage(data)
+// {
+//     var element = document.getElementById("qid_results");
+//     for (var x = 0; x < data.length; x++)
+//     {
+//         q_id = data[x];
+//         var q_title = questions_dict[q_id];
+//         let row = `<div class="parent-tab id="tab-${x}">
+//             <label for="tab-${i}">
+//                 <span>${question_title}</span>
+//             </label>
+//         </div>`
+//         element.innerHTML += row;
+//     }
+// }
 </script>
 </html>
