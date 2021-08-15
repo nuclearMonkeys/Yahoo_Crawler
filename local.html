@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Title of the document</title>
+    </head>
+    <body>
+        <HTA:APPLICATION
+        ID="somethingHere"
+        APPLICATIONNAME="YouAppsName"
+        WINDOWSTATE="maximize"
+   >
+         <script>
+        function ReadFile(filename) {
+            try {
+                var fso  = new ActiveXObject("Scripting.FileSystemObject");
+                var fh = fso.OpenTextFile(filename, 1);
+                var contents = fh.ReadAll();
+                fh.Close();
+                return contents;
+            } catch (Exception) {
+                return "Cannot open file :(";
+            }
+        }
+        function WriteFile(filename, text) {
+            try {
+                var fso  = new ActiveXObject("Scripting.FileSystemObject");
+                var fh = fso.OpenTextFile(filename, 8, true);
+                fh.Write(text);
+                fh.Close();
+            } catch(Exception) {
+                alert("Failed to write.");
+            }
+        }
+    
+    console.log("WORD")
+    console.log(ReadFile("./mytest.txt"));
+    
+    </script>
+    </HTA:APPLICATION>
+    </body>
+
+    
+</html>
