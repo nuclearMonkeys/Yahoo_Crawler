@@ -4,40 +4,80 @@
         <meta charset="utf-8">
         <title>Title of the document</title>
     </head>
+
+    <style>
+    html 
+    {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 100%;
+        background: #333;
+    }
+
+
+    #page-wrapper {
+        width: 600px;
+        /* background: #FFF; */
+        padding: 1em;
+        margin: 1em auto;
+        min-height: 300px;
+        border-top: 5px solid #69c773;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    img {
+    max-width: 100%;
+    }
+
+    #fileDisplayArea {
+    margin-top: 2em;
+    width: 100%;
+    overflow-x: auto;
+    }
+
+    </style>
+
     <body>
-        <HTA:APPLICATION
-        ID="somethingHere"
-        APPLICATIONNAME="YouAppsName"
-        WINDOWSTATE="maximize"
-   >
-         <script>
-        function ReadFile(filename) {
-            try {
-                var fso  = new ActiveXObject("Scripting.FileSystemObject");
-                var fh = fso.OpenTextFile(filename, 1);
-                var contents = fh.ReadAll();
-                fh.Close();
-                return contents;
-            } catch (Exception) {
-                return "Cannot open file :(";
-            }
+        <div id="page-wrapper">
+            <h1>Text File Reader</h1>
+            <div>
+                Select a text file:
+                <input type="file" id="fileInput">
+            </div>
+
+            <pre id="fileDisplayArea"></pre>
+
+        </div>
+        <script>
+        window.onload = function() 
+        {
+            var fileInput = document.getElementById('fileInput');
+            var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+            fileInput.addEventListener('change', function(e) {
+                var file = fileInput.files[0];
+                var textType = "text.*/";
+
+                if (file.type.match(textType)) 
+                {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) 
+                    {
+                        fileDisplayArea.innerText = reader.result;
+                    }
+
+                    reader.readAsText(file);
+                } else 
+                {
+                    fileDisplayArea.innerText = "File not supported!";
+                }
+            })
         }
-        function WriteFile(filename, text) {
-            try {
-                var fso  = new ActiveXObject("Scripting.FileSystemObject");
-                var fh = fso.OpenTextFile(filename, 8, true);
-                fh.Write(text);
-                fh.Close();
-            } catch(Exception) {
-                alert("Failed to write.");
-            }
-        }
-    
-    console.log("WORD")
-    console.log(ReadFile("./mytest.txt"));
-    
-    </script>
-    </HTA:APPLICATION>
+        </script>
     </body>
 
     
