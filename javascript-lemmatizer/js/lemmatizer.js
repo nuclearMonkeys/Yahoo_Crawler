@@ -178,8 +178,8 @@ Lemmatizer.prototype = {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", file, false);
       xhr.send();
-      console.log(xhr.responseText);
       var data = xhr.responseText;
+      console.log(data);
       this.store_data(key, data);
     }
   },
