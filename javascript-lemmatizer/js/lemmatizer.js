@@ -179,12 +179,12 @@ Lemmatizer.prototype = {
       xhr.open("GET", file, false);
       xhr.send();
       var data = xhr.responseText;
-      console.log(data);
       this.store_data(key, data);
     }
   },
 
   store_data: function(key, data) {
+    console.log(data);
     localStorage.setItem(key, data);
   },
 
