@@ -83,7 +83,6 @@ var Lemmatizer = function() {
 
   // fetch dictionary data from localStorage, then set up wordlists and exceptions
   for (var pos in this.wn_files) {
-    console.log(pos);
     this.setup_dic_data(pos);
   }
 };
@@ -154,6 +153,7 @@ Lemmatizer.prototype = {
 
   // set up dictionary data
   load_wordnet_files: function(pos, list, exc) {
+    console.log(exc);
     var key_idx = pos + this.idx;
     this.open_file(key_idx, list);
     var key_exc = pos + this.exc; 
@@ -190,7 +190,6 @@ Lemmatizer.prototype = {
 
   fetch_data: function(key) {
     var data = JSON.parse(localStorage.getItem(key));
-    console.log(data);
     return data;
   },
   // end of set up dictionary data
