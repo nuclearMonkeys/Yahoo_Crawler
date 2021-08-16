@@ -155,6 +155,7 @@ Lemmatizer.prototype = {
   load_wordnet_files: function(pos, list, exc) {
     var key_idx = pos + this.idx;
     this.open_file(key_idx, list);
+    console.log(list);
     var key_exc = pos + this.exc; 
     this.open_file(key_exc, exc);
   },
@@ -163,7 +164,6 @@ Lemmatizer.prototype = {
     var self = this;
     var key_idx = pos + this.idx;
     _.each( this.fetch_data(key_idx), function(w) {
-      console.log(w);
       self.wordlists[pos][w] = w;
     });
     var key_exc = pos + this.exc; 
