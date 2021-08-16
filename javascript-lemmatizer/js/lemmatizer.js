@@ -81,8 +81,6 @@ var Lemmatizer = function() {
     this.load_wordnet_files(pos, this.wn_files[pos][0], this.wn_files[pos][1]);
   }
 
-  console.log(this.wn_files[pos][1]);
-
   // fetch dictionary data from localStorage, then set up wordlists and exceptions
   for (var pos in this.wn_files) {
     this.setup_dic_data(pos);
@@ -165,6 +163,7 @@ Lemmatizer.prototype = {
     var self = this;
     var key_idx = pos + this.idx;
     _.each( this.fetch_data(key_idx), function(w) {
+      console.log(w);
       self.wordlists[pos][w] = w;
     });
     var key_exc = pos + this.exc; 
