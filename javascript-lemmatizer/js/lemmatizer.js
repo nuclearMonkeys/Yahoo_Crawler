@@ -174,7 +174,7 @@ Lemmatizer.prototype = {
   },
 
   open_file: function(key, file) {
-    if (!localStorage.getItem(key)) {
+    if (!window.localStorage.getItem(key)) {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", file, false);
       xhr.send();
@@ -184,11 +184,11 @@ Lemmatizer.prototype = {
   },
 
   store_data: function(key, data) {
-    localStorage.setItem(key, data);
+    window.localStorage.setItem(key, data);
   },
 
   fetch_data: function(key) {
-    var data = JSON.parse(localStorage.getItem(key));
+    var data = JSON.parse(window.localStorage.getItem(key));
     return data;
   },
   // end of set up dictionary data
