@@ -155,7 +155,6 @@ Lemmatizer.prototype = {
   load_wordnet_files: function(pos, list, exc) {
     var key_idx = pos + this.idx;
     this.open_file(key_idx, list);
-    console.log(list);
     var key_exc = pos + this.exc; 
     this.open_file(key_exc, exc);
   },
@@ -176,6 +175,7 @@ Lemmatizer.prototype = {
 
   open_file: function(key, file) {
     if (!localStorage.getItem(key)) {
+      console.log(file);
       var xhr = new XMLHttpRequest();
       xhr.open("GET", file, false);
       xhr.send();
