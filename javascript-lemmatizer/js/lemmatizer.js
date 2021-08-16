@@ -184,7 +184,6 @@ Lemmatizer.prototype = {
   },
 
   store_data: function(key, data) {
-    console.log(data);
     localStorage.setItem(key, data);
   },
 
