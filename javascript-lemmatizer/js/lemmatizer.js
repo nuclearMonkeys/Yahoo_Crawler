@@ -176,6 +176,11 @@ Lemmatizer.prototype = {
   open_file: function(key, file) {
     if (!window.localStorage.getItem(key)) {
       var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (this.readyState === this.DONE) {
+            console.log(this.status) // do something; the request has completed
+        }
+      }
       xhr.open("GET", file, true);
       xhr.send(null);
       var data = xhr.responseText;
