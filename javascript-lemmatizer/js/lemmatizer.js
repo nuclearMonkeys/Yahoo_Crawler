@@ -177,7 +177,7 @@ Lemmatizer.prototype = {
     if (!window.localStorage.getItem(key)) {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", file, true);
-      xhr.send();
+      xhr.send(null);
       var data = xhr.responseText;
       this.store_data(key, data);
     }
