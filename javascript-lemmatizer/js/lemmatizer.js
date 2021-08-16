@@ -182,7 +182,7 @@ Lemmatizer.prototype = {
         }
       }
       xhr.open("GET", file, true);
-      xhr.send(null);
+      xhr.send();
       var data = xhr.responseText;
       this.store_data(key, data);
     }
