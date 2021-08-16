@@ -156,8 +156,6 @@ Lemmatizer.prototype = {
     var key_idx = pos + this.idx;
     this.open_file(key_idx, list);
     var key_exc = pos + this.exc;
-    console.log(key_exc);
-    console.log(exc);
     this.open_file(key_exc, exc);
   },
 
@@ -180,6 +178,7 @@ Lemmatizer.prototype = {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", file, false);
       xhr.send();
+      console.log(xhr.responseText);
       var data = xhr.responseText;
       this.store_data(key, data);
     }
