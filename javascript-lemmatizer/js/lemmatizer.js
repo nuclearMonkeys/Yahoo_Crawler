@@ -179,6 +179,7 @@ Lemmatizer.prototype = {
 
       xhr.onload = () => 
       {
+        console.log(xhr.responseText);
           if (xhr.status >= 200 && xhr.status < 300) 
           {
               const response = JSON.parse(xhr.responseText);
