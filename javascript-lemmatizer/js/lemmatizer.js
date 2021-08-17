@@ -189,6 +189,7 @@ Lemmatizer.prototype = {
       };
 
       var data = dict[key]
+      console.log(data);
       this.store_data(key, data);
     }
   },
