@@ -178,11 +178,11 @@ Lemmatizer.prototype = {
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(this.status) // do something; the request has completed
+            console.log(file) // do something; the request has completed
         }
       }
       xhr.open("GET", file, true);
-      xhr.send("foo=bar&lorem=ipsum");
+      xhr.send();
       var data = xhr.responseText;
       this.store_data(key, data);
     }
