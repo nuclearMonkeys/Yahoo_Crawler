@@ -176,11 +176,22 @@ Lemmatizer.prototype = {
   open_file: function(key, file) {
     if (!window.localStorage.getItem(key)) {
       var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            console.log(file) // do something; the request has completed
-        }
+
+      xhr.onload = () => 
+      {
+          if (xhr.status >= 200 && xhr.status < 300) 
+          {
+              const response = JSON.parse(xhr.responseText);
+              console.log(response);
+          }
       }
+
+      // xhr.onreadystatechange = function() {
+      //   if (this.readyState === 4 && this.status === 200) {
+      //       console.log(file) // do something; the request has completed
+      //   }
+      // }
+
       xhr.open("GET", file, true);
       xhr.send();
       var data = xhr.responseText;
