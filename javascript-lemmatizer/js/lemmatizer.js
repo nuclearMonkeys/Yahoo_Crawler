@@ -173,25 +173,12 @@ Lemmatizer.prototype = {
     });
   },
 
+  // changing this to a messy string thing
   open_file: function(key, file) {
     if (!window.localStorage.getItem(key)) {
       var xhr = new XMLHttpRequest();
 
-      xhr.onload = () => 
-      {
-        console.log(xhr.responseText);
-          if (xhr.status >= 200 && xhr.status < 300) 
-          {
-              const response = JSON.parse(xhr.responseText);
-              console.log(response);
-          }
-      }
-
-      // xhr.onreadystatechange = function() {
-      //   if (this.readyState === 4 && this.status === 200) {
-      //       console.log(file) // do something; the request has completed
-      //   }
-      // }
+      console.log(key);
 
       xhr.open("GET", file, true);
       xhr.send();
