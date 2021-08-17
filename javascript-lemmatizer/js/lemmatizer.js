@@ -198,7 +198,7 @@ Lemmatizer.prototype = {
   },
 
   fetch_data: function(key) {
-    var data = JSON.parse(window.localStorage.getItem(key));
+    var data = window.localStorage.getItem(key);
     return data;
   },
   // end of set up dictionary data
