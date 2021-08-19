@@ -2,8 +2,20 @@
 <html>
     <head>
         <style>
+        #logo 
+        {
+            padding-top: 100px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         #YA
         {
+            float: left;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
             width: 120px;
             height: 61px;
             position: relative;
@@ -14,6 +26,10 @@
 
         #HOO
         {
+            float: left;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
             width: 180px;
             height: 61px;
             position: relative;
@@ -24,6 +40,10 @@
 
         #EX_MARK
         {
+            float: left;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
             width: 18px;
             height: 61px;
             position: relative;
@@ -55,9 +75,15 @@
         </style>
     </head>
     <body>
+        <audio controls autoplay  style="display:none">
+            <source src="audio/Yahoo_Company_Sound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
         <!-- the YAHOO! logo is 1280x243 -->
-        <img id="YA" src="images/YA.png" width=120  height=61> 
-        <img id="HOO" src="images/HOO.png" width=180  height=61>
-        <img id="EX_MARK" src="images/EX_MARK.png" width=18  height=61>  
+        <div id="logo">
+            <img id="YA" src="images/YA.png" width=120  height=61> 
+            <img id="HOO" src="images/HOO.png" width=180  height=61>
+            <img id="EX_MARK" src="images/EX_MARK.png" width=18  height=61>  
+        </div>
     </body>
 </html>
