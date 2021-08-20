@@ -8,6 +8,70 @@ https://codingnepalweb.com/full-screen-search-bar-animation-html-css/ */
     box-sizing: border-box;
 }
 
+#logo 
+{
+    /* padding-top: 100px; */
+    /* top: 275%; */
+    left: 50%;
+    transform: translate(-50%, 225%);
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#YA
+{
+    width: 120px;
+    height: 61px;
+    /* position: relative; */
+    animation-name: ya-grow;
+    animation-duration: 3s;
+    animation-delay: 0.7s;
+}
+
+#HOO
+{
+    width: 180px;
+    height: 61px;
+    /* position: relative; */
+    animation-name: hoo-grow;
+    animation-duration: 3s;
+    animation-delay: 1s;
+}
+
+#EX_MARK
+{
+    width: 18px;
+    height: 61px;
+    /* position: relative; */
+    animation-name: ex-grow;
+    animation-duration: 4s;
+    animation-delay: 2.5s;
+}
+
+@keyframes ya-grow
+{
+    0% {width: 120px; height: 61px;}
+    50% {width: 240px; height: 122px;}
+    100% {width: 120px; height: 61px;}
+}
+
+@keyframes hoo-grow
+{
+    0% {width: 180px; height: 61px;}
+    50% {width: 320px; height: 122px;}
+    100% {width: 180px; height: 61px;}
+}
+
+@keyframes ex-grow
+{
+    0% {width: 18px; height: 61px;}
+    50% {width: 32px; height: 122px;}
+    100% {width: 18px; height: 61px;}
+}
+
 body {
     position: relative;
     font-family: "Poppins", san-serif;
