@@ -10,8 +10,6 @@ https://codingnepalweb.com/full-screen-search-bar-animation-html-css/ */
 
 #logo 
 {
-    /* padding-top: 100px; */
-    /* top: 275%; */
     left: 50%;
     transform: translate(-50%, 225%);
     position: relative;
@@ -25,7 +23,6 @@ https://codingnepalweb.com/full-screen-search-bar-animation-html-css/ */
 {
     width: 120px;
     height: 61px;
-    /* position: relative; */
     animation-name: ya-grow;
     animation-duration: 3s;
     animation-delay: 0.7s;
@@ -35,7 +32,6 @@ https://codingnepalweb.com/full-screen-search-bar-animation-html-css/ */
 {
     width: 180px;
     height: 61px;
-    /* position: relative; */
     animation-name: hoo-grow;
     animation-duration: 3s;
     animation-delay: 1s;

@@ -58,7 +58,8 @@ var id_list = questions_answers_dict[q_id];
 
 var current_index = id_list.length - 1;
 
-// buildQuestion();
+buildQuestion();
+buildActionBar();
 buildAnswers(id_list);
 
 function buildQuestion() 
@@ -80,6 +81,19 @@ function buildQuestion()
                         <p>likes: ${num_of_likes}</p>
                     </div>
                 </div>`;
+
+    results.innerHTML += row;
+}
+
+function buildActionBar() 
+{
+    var results = document.getElementById("results");
+
+    var row = `<div class="w3-bar w3-green">
+                    <div class="w3-bar-item">London</div>
+                    <div class="w3-bar-item">Paris</div>
+                    <div class="w3-bar-item">Tokyo</div>
+                </div>` ;
 
     results.innerHTML += row;
 }
@@ -122,7 +136,7 @@ function buildAnswers(data) {
         current_index--;
 
         buildAnswers(data);
-    }, 300) ;
+    }, 00) ;
 
     // Get the answers
     
