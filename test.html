@@ -12,8 +12,11 @@
 
     <body>
         <div class="wrapper" id="questions-results">
-            <h1>Top Results</h1>
+            <div class="back-btn">
+                <span class="fas fa-reply"></span>
+            </div>
 
+            <h1>Top Results</h1>
         </div>
     </body>
 
@@ -38,7 +41,7 @@ function buildQuestions(data)
         var num_of_answers = questions_dict[q_id][1];
         var num_of_likes = questions_dict[q_id][3];
 
-        let row = `<div class="w3-container w3-center w3-animate-left">
+        let row = `<div class="w3-container w3-animate-left">
             <div class="parent-tab id="tab-${i}">
                 <label for="tab-${i}">
                     <span>${question_title}</span>
