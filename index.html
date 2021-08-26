@@ -96,8 +96,22 @@
                 // script0.remove(obj0)
                 // console.log(script);
                 var queryword = document.getElementById("query").value;
-                sessionStorage.setItem("queryWord", queryword);
-                window.location.href = './results_index.html';
+                if (queryword != "")
+                {
+                    sessionStorage.setItem("queryWord", queryword);
+                    window.location.href = './results_index.html';
+                }
+            });
+            var query_item = document.getElementById("query");
+            query_item.addEventListener("keyup", function(event) {
+                var queryword = document.getElementById("query").value;
+                if (event.keyCode === 13) {
+                    if (queryword != "")
+                    {
+                        sessionStorage.setItem("queryWord", queryword);
+                        window.location.href = './results_index.html';
+                    }
+                }
             });
         </script>
 
