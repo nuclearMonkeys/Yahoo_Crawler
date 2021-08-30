@@ -11,8 +11,8 @@
     </body>
 
 <script>
-    var questionObject = sessionStorage.getItem("questionObject");
-    var answersList = sessionStorage.getItem("answersList");
+    var questionObject = JSON.parse(sessionStorage.getItem("questionObject"));
+    var answersList = JSON.parse(sessionStorage.getItem("answersList"));
 
     var results = document.getElementById("question-answers");
 
