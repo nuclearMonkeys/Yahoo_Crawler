@@ -7,7 +7,6 @@
 
     <body>
         <div class = "wrapper" id = "question-answers">
-            <h1>Question Test</h1>
         </div>
     </body>
 
@@ -17,15 +16,24 @@
 
     var results = document.getElementById("question-answers");
 
-    let row = `<div class="test-content">
-                    <label>
-                        <span>${questionObject}</span>
-                        <span>${answersList}</span>
-                    </label>
-                </div>`;
+    let row1 = `<header class="w3-container">
+                    <h1>${questionObject[0]}</h1>
+                    <p>Question by ${users_dict[questionObject[4]]}</p>
+                </header>`;
     
     // Answers page seems to be taking too long to load and doesn't show
     // the questions object I want. Might be loading the wrong thing?
 
-    results.innerHTML += row;
+    results.innerHTML += row1;
+
+    for (var ans = 0; ans < answersList.length; ans++)
+    {
+        var ansnum = answersList[ans];
+        var answer = answers_dict[ansnum];
+        let row2 = `<article class="w3-container">
+                        <p>${answer[0]}</p>
+                    </article>`;
+        results.innerHTML += row2;
+    }
+
 </script>
