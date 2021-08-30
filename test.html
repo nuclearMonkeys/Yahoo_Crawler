@@ -12,8 +12,10 @@
 
     <body>
         <div class="wrapper" id="questions-results">
-            <div class="back-btn">
-                <span class="fas fa-reply"></span>
+            <div class="btn-background">
+                <div class="back-btn">
+                    <span class="fas fa-reply"></span>
+                </div>
             </div>
 
             <h1>Top Results</h1>
@@ -65,5 +67,18 @@ function buildQuestions(data)
             
     }
 }
+
+$(".back-btn").click(function() 
+{
+    $(".btn-background").addClass("active");
+    $(this).css("display", "none");
+    // $(".")
+    // $("btn-background").fadeIn(500);
+    setTimeout(function() 
+    {
+        window.location.href = "./index.html"
+    }, 400);
+    
+});
 </script>
 </html>
