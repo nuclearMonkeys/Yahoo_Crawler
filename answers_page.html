@@ -15,13 +15,17 @@
     var questionObject = sessionStorage.getItem("questionObject");
     var answersList = sessionStorage.getItem("answersList");
 
-    var results = document.getElementById("questions-answers");
+    var results = document.getElementById("question-answers");
 
     let row = `<div class="test-content">
                     <label>
                         <span>${questionObject}</span>
+                        <span>${answersList}</span>
                     </label>
                 </div>`;
+    
+    // Answers page seems to be taking too long to load and doesn't show
+    // the questions object I want. Might be loading the wrong thing?
 
     results.innerHTML += row;
 </script>
