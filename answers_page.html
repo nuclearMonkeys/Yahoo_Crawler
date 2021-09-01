@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang='en' dir='ltr'>
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="answers.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="./js_dictionaries/answers/answers.js"></script>
         <script src="./js_dictionaries/users/users.js"></script>
     </head>
@@ -30,9 +34,26 @@
     {
         var ansnum = answersList[ans];
         var answer = answers_dict[ansnum];
-        let row2 = `<article class="w3-container">
-                        <p>${answer[0]}</p>
-                    </article>`;
+        var user_name = users_dict[answers_dict[ansnum][2]];
+        
+        if (user_name == "None") 
+        {
+            user_name = "Anonymous"
+        }
+
+        let row2 = `<div class="answer w3-container w3-center w3-animate-left" id="answer-${ansnum}">
+                    <label for="answer-${ansnum}">
+                        <span>${user_name}</span>
+                    </label>
+                    <div class="description" id="description-${ansnum}">
+                        <p id="answer-description">${answer[0]}</p>
+                        <br></br>
+                    </div>
+                    <div class="num-of-likes" id="answers-likes-${ansnum}">
+                        <p>LIKES: ${answer[1]}</p>
+                    </div>
+                </div>`;
+
         results.innerHTML += row2;
     }
 
