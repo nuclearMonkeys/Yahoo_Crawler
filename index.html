@@ -30,6 +30,8 @@
             <img id="EX_MARK" src="images/EX_MARK.png" width=18  height=61>  
         </div>
 
+        <div class="btn-background"></div>
+
         <div class="close-btn">
             <span class="fas fa-times"></span>
         </div>
@@ -46,6 +48,15 @@
         </div>
 
         <script>
+            call();
+
+            function call() {
+                $("btn-background").addClass("active");
+                $(this).css("display", "none");
+                console.log("something");
+                $("btn-background").fadeOut(500);
+            }
+
             $(".search-btn").click(function()
             {
                 $(".wrapper").addClass("active");
