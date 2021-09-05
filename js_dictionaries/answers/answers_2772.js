@@ -1,0 +1,52 @@
+var answers_dict = {
+	144406 : ["Uno de los objetivos de la meditacion, segun un maestro que tuve, es dejar de parar de pensar... Yo no se si sea posible... lo trate por mucho tiempo... pero lo que sì se es que algo que ayuda es tener conciencia de que eso que piensas son simplemente pen", 11624, "RoqUyD45aa", 1],
+	144407 : ["hola. el cerebro humano siempre esta pensando y siempre esta activo incluso cuando esta dormido; pero para alejar los malos pensamientos yo te recomiendo que des un hondo respiro y trates de pensar en otras cosas mas agradables OK. saludos.", 11624, "None", 0],
+	144408 : ["A mi mamá hace 13 años que la perdí físicamente, pero siempre la tengo cerca de mí. Mi homenaje es evocarla en su sencillez, su dedicación y su amor. Cuando ella partió conocí la verdadera soledad.", 11625, "j3iwSvIWaa", 0],
+	144409 : ["Ah!!! mi querida amiga, mil gracias...por lo inminente, tus  preguntas tan llenas de lo bueno... saludos amiga, un beso", 11622, "None", 2],
+	144410 : ["Como en sus cuentos del informe de Brodie,,, en especial  \"El evangelio según San Marcos\". Es una belleza y te lo recomiendo. Un beso,,Orlando,,, \"El tiempo es la sustancia de la que estamos hechos\" (Borges)", 11622, "mCT60hRRaa", 3],
+	144411 : ["Creatura, en buena onda, de verdad quieres un consejo? es que en serio que ya no se si realmente quieres cambiar tu vida o de esa manera eres feliz, me duele mucho cada vez que veo que abusan de una mujer, pero me duele más saber que ésta acepta lo que le", 11629, "3a94cd345cb3e9588460a5203282dfb4aa", 1],
+	144412 : ["Que aun no se te cae la venda de los ojos! No te preocupes, asi somos todos los seres humanos... no entendemos la mayor parte de las veces que muchos ciclos en la vida tenemos que cerrarlos!", 11629, "None", 3],
+	144413 : ["amigo se lo que se siente, yo pase por lo mismo no andaba deprimida, simplemente con un terrible vacio intente con un novio porque nunca me intereso una relacion seria y pense que eso era, pero no era eso y me quise suicidar por no saber como manejarlo, y", 11634, "None", 0],
+	144414 : ["tu mascota     aunque no hable  es  lo mas fiel a ati  y entiende cuando esats triste alegre etc", 11631, "2IGAm3pzaa", 0],
+	144415 : ["seguiria siendo mi pareja ...pues porque el es mi mejor companero...mi amigo.. mi amante... mi esposo..y complice de todas las ideas locas que aveces tengo en mi cabeza jajaja. y como siempre un gusto saber de ti!!! dayi te mando una abrazo....!!", 11631, "MEda34r8aa", 0],
+	144416 : ["Â¡Hola cuÃ±is! Â¡Como siempre, mÃ¡s que emotivos tus poesÃ­as...gracias por compartirlas! Luna,  fiel testigo  de los amores,  los sueÃ±os  y los dolores,  de los escritores.   Luna encantadora  dime cÃ³mo hago  para atraer  al que mi alma aÃ±ora.   Luna ", 11623, "None", 1],
+	144417 : ["gracias por compartir con nosotros  mil gracias", 11623, "YdsXS446aa", 1],
+	144418 : ["Amigo bello poema dedicado para el amor de tu vida. te deseo que seas muy feliz y q' ambos disfrutes del amor.", 11623, "1e92a45e427ca5fc2470894e1c09382aaa", 1],
+	144419 : ["Hola Mis hijas Saludos", 11627, "BhL0cT62aa", 1],
+	144420 : ["Mi esposo, la familia, amigos y el trabajo. Salu2. Buen lunes.", 11627, "O3nAAEAUaa", 1],
+	144421 : ["Esteeeee... Me podrÃ­a repetir la pregunta!??! xD", 11626, "IzmAEo8Faa", 2],
+	144422 : ["Claro que se puede, la pregunta quizá sería ¿se quiere? a cambio de -Inteligencia -Respeto -Madurez -Educación -Criterio. Lástima que te lo digo honestamente, muchos no están dispuestos, a la menor provocación (eso es lo que ellos ven), insultan, agreden,", 11630, "QsbnsqgBaa", 4],
+	144423 : ["Hablò su santidad franzisko!!! O para que me entiendas...al menos èste no està dispuesto!! PD: YO SI!! Y te propongo algo: Dile a Franzisko que hagamos un ejercicio durante un dia completo en el que se realcen las virtudes de nuestros antagonistas.. Yo es", 11630, "None", 4],
+	144424 : ["lo conteste por el metodo de igualacion y sale como resultado cero (0) te lo voy a explicar:..... 3x-y=2 6x-2y=4 despejas \"x\" en las 2 ecuaciones y queda 3x-y=2 3x=2+y x=2+y/3 6x-2y=4 6x=4+2y x=4+2y/6 y se multiplica cruzado y kedaria (2+y por 6) y (4+2y ", 11635, "1nEDtHYoaa", 1],
+	144425 : ["el hombre es fisiologicamente  diferente a los perros", 11632, "None", 0],
+	144426 : ["por que ellos tiene un cuerpo muy diferente a el de el humano y su sistema de sangre es otro. abder rojas", 11632, "None", 0],
+	144427 : ["Me gusta su nombre... Pero  Me gustarÃ­a que se llamara. La Nueva granada... AsÃ­ se llamaba antes y asÃ­ me gusta mas â â â â â â â â â â â â â â â â â â â â â                        Saludos  â‿- â â â â", 11633, "None", 0],
+	144428 : ["-creen que shizune tenga algun poder que no conoscamos? :O ser inutil xE naa mentiras jumm.. ps yo q se xD en los juegos tiene bastante poderes jum! =O -que pensarian si de repente a naruto el apareciera un hermano? O_O ps diria q... kishimoto se kedo sin", 11633, "None", 1],
+	144429 : ["De hecho la unica forma posible es poner tu mente en blanco, por que ahora yo no lo puedo saber, pues estoy pensando lo que te respondí. Hay cosas que no quieres pensar pero piensas, la unica forma es irte a hacerte pen.dejo a otra parte y con \"otra cosa\"", 11624, "7nejzjrjaa", 0],
+	144430 : ["Es que ese pensamiento del que hablas se vuelve una obsesión, para quitártelo de la cabeza, tienes que distraerte, estar con amigos que te ayuden si les quieres contar, sino basta conque te rodees de personas que no conozcan lo que te está afectando y div", 11624, "01f7edae8c39071cee08eff3371b1787aa", 0],
+	144431 : ["\"Uno llega a ser grande por lo que lee y no por lo que escribe.\" Cualquier destino, por largo y complicado que sea, consta en realidad de un solo momento: el momento en que el hombre sabe para siempre quién es.” Fuente: “El Aleph”.", 11622, "8XnJ4bR9aa", 3],
+	144432 : ["Lo esperado y lo inesperado sucederá porque el tiempo es un pédulo que escribe sobre los objetos que están en su camino. Y todos los sucesos fueron escritos por el tiempo. Cordial abrazo Apolo.", 11622, "58f011afb8f785955b41c1f08e0568f6aa", 1],
+	144433 : ["Yo que tu... Lo agarraba  a pu.ta.zos al pende.jo ese y le daba de ma.dra.zos en la cien para que de una vez se muera el in.feliz Con todo respeto!", 11629, "rolz9Ujaaa", 2],
+	144434 : ["Chale Gina veo que ya somos varios los que no  te entendemos!!!!! PLOP!!!!!!!!!!", 11629, "iD0nD5KVaa", 2],
+	144435 : ["Prueba esa mentira llamada AMOR, luego cuando veas que no existe no te sentiras mal por no tenerlo, te sentiras feliz de verlo hundirse en la miseria.", 11634, "89k9Xsqxaa", 1],
+	144436 : ["Resultado con celdas imaginarias: Para la primera: B1:B6 son las celdas de las x seleccionadas desde la pregunta 1 hasta la 6 =SI(CONTAR.BLANCO(B1:B6)<3,\"Soy matutino\", \"\") Para la segunda: B7:B12 son las celdas de las x seleccionadas desde la pregunta 7 ", 11636, "None", 0],
+	144437 : ["que rara pregunta dayi..! si descubriera que mi mascota hablara me moriria del susto", 11631, "oAGWz3n4aa", 0],
+	144438 : ["mi mascota , por que la amo aunque no hable", 11631, "None", 0],
+	144439 : ["mi maskota", 11631, "None", 0],
+	144440 : ["Que delicada y hermoso poema.....un amor que perdurara hasta la eternidad!!  Es un pacto que sera marcado, como un sello en el corazon de quien amas tanto!! Y escogiste la cancion perfecta que va a tono con la poesia, \"Te Amare\" - Miguel Bose!! Que tengas", 11623, "vKIea94Faa", 1],
+	144441 : ["Hola Marco. Bello tu poema. AsÃ­ es el verdadero amor, aunque pase lo que pase, siempre seguirÃ¡ VIVO. Solo quien ama de verÃ¡s, no podrÃ¡ dejar morir tan bello sentimiento. Saluditos y felicidades por ese amor tan hermoso y tan correspondido.", 11623, "nXxXgF7xaa", 1],
+	144442 : ["Lo Mas lindo de mi vida!! Es mi perrita Sol  <3  Respondes mi pregunta (? :D", 11627, "E4aWSdOEaa", 1],
+	144443 : ["mis amigas.", 11627, "None", 1],
+	144444 : ["jaajjaajajaj mira que listo, no se hizo millonario firmando cheques el tipo! saludos DJ y yo.... bueno yo todavia no puedo poner pulgares arriba... pero ya casi!!!!", 11626, "None", 1],
+	144445 : ["y en europa a puro pan y cebolla nooooooo deja con alguien asi no salgo ni a la esquina jajaja besotes bb♥", 11626, "ckLnnu3Naa", 1],
+	144446 : ["AQUI no es posible.", 11630, "v5E3YdMLaa", 4],
+	144447 : ["3x-y=2         3x=6     y=4  6-4=2 6x-2y=4       6x=6x1  2y=2x1   osea 6-2=4 Yo no soy muy capo en mates porcia", 11635, "None", -1],
+	144448 : ["bueno mira lo q yo haria es resolver esa multiplicacion es decir que nos quedaria una ecuacion de la siguiente manera... 3x-4= 9x+2x+2 ahora pasas lo que tiene x a un lado de la igualdad y los que no a otro lado... teniendo: 3x-9x-2x=4+2 operando terminos", 11635, "4xLWQZUwaa", 2],
+	144449 : ["Que sangre por la nariz no es normal. Llevalo a tu veterinario. Puede ser algo serio y perdes el tiempo.", 11632, "eOx9ncSVaa", 2],
+	144450 : ["HOLAS!! =DDD !! enserio??!!! =DDDD!! M e alegro mucho !!! no se va =DDD que alivio n___n!!!  ñ___ñ muy bien ahora a empezar la encuesta  y con mas ganas todabia non o__o vaya que te inspiraste en la encuesta esta recontra remil larga o__o debes de estar m", 11633, "7VU6bvGqaa", 2],
+	144451 : ["No necesariamente, pero como el pensamiento es una actividad privada, y solo se conoce de él lo que tu deseas exteriorizar, entre más piensas, más material dispones, para mostrar luego, lo que más se adapte a la cuestión planteada Y como el cerebro, neces", 11624, "Q7GaWeNdaa", 2],
+	144452 : ["Dialécticamente, toda la naturaleza “se halla en un estado perenne de nacimiento y muerte, en flujo constante, sujeto a incesantes cambios y movimientos” (F. Engels, Introducción a la Dialéctica de la Naturaleza)   y toda la naturaleza está inmersa en la ", 11622, "SsNun1Jhaa", 1],
+	144453 : ["No entendi ni madres.", 11629, "None", 2],
+	144454 : ["hola gina yo te aconsejo que le digas si ala criada porque si quiere ir al baile y tambien dice que esta enferma porque la subieron a un elicoptero en bora bora pero dicen que esta mas cheap en hawaii pero a mi me gusta mas jugar en las vegas porque ya so", 11629, "cprgtz7Naa", 1],
+	144455 : ["q problema ! amigo !! yo te aconsejo !!! vive la vida siente q vives !! parece q no lo sientes ! aprovech cada segundo !! el tener novia ! no te solucionara el problema ! y si es por amor !! el te llegara !  cuando conocas el AMORRR !! nunca mas te volver", 11634, "u2CfXvO1aa", 0],
+}

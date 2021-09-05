@@ -103,7 +103,7 @@ if __name__ == '__main__':
     i = 0
 
     for filename in filenames:
-        file = open(path + "/" + filename, 'r')
+        file = open(path + "/" + filename, 'r', encoding='utf-8')
 
         rows = file.readlines()
 
@@ -136,7 +136,7 @@ if __name__ == '__main__':
     revised_file.write("var questions_dict = {\n")
 
     for filename in filenames:
-        original_file = open(path + "/" + filename, 'r')
+        original_file = open(path + "/" + filename, 'r', encoding='utf-8')
         rows = original_file.readlines()
         rows.pop(0)
         rows.pop(-1)
@@ -181,7 +181,7 @@ if __name__ == '__main__':
     revised_file.write("var answers_dict = {\n")
 
     for filename in filenames:
-        original_file = open(path + "/" + filename, 'r')
+        original_file = open(path + "/" + filename, 'r', encoding='utf-8')
         
         rows = original_file.readlines()
 

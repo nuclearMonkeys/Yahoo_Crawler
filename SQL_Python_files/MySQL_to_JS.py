@@ -32,6 +32,7 @@ def write_questions(filename, questions):
 
         writer.writelines(question_string + '}')
         writer.close()
+
         try:
             
             questions = questions[questions_per_file:]
@@ -51,13 +52,13 @@ def write_answers(filename, answers):
 
         for answer in current_answers:
             answer_string += "\t" + str(answer[0]) + " : " + "["
-            for element in answer[1:3]:
+            for element in answer[1:4]:
                 if isinstance(element, str):
                     element = element.replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
                     answer_string += '"' + element + '"' + ", "
                 else:
                     answer_string += str(element) + ", "
-            answer_string += '"' + answer[3] + '"' + "],\n"
+            answer_string += str(answer[4]) + "],\n"
 
         current_file_index += 1
 
@@ -68,6 +69,7 @@ def write_answers(filename, answers):
             answers = answers[answers_per_file:]
         except IndexError:
             answers = list()
+        
 
 def write_users(filename, users):
     current_file_index = 0

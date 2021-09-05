@@ -44,11 +44,11 @@ def insert_question(connection, q_id, title, num_of_answers, category, rating, u
 
     connection.commit()
 
-def insert_answer(connection, a_id, description, q_id, u_id):
+def insert_answer(connection, a_id, description, q_id, u_id, rating):
     insert_statement = """
     INSERT INTO answers VALUES\n
     """
-    insert_statement += "({}, {}, {}, {})\n".format(a_id, description, q_id, u_id)
+    insert_statement += "({}, {}, {}, {}, {})\n".format(a_id, description, q_id, u_id, rating)
     execute_query(connection, insert_statement)
 
     connection.commit()
