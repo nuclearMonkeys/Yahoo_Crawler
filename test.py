@@ -132,7 +132,7 @@ if __name__ == '__main__':
     # The section that revises the q_ids/a_ids
 
     ########################################################################
-    revised_file = open("./js_dictionaries/questions/questions.js", 'w')
+    revised_file = open("./js_dictionaries/answers/answers.js", 'w')
     revised_file.write("var questions_dict = {\n")
 
     for filename in filenames:
@@ -171,42 +171,42 @@ if __name__ == '__main__':
 
     # Transition to answers
     ########################################################################
-    path = "./js_dictionaries/answers"
+    # path = "./js_dictionaries/answers"
 
-    filenames = os.listdir(path)
+    # filenames = os.listdir(path)
 
-    filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
+    # filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
 
-    revised_file = open(path + "/answers.js", 'w')
-    revised_file.write("var answers_dict = {\n")
+    # revised_file = open(path + "/answers.js", 'w')
+    # revised_file.write("var answers_dict = {\n")
 
-    for filename in filenames:
-        original_file = open(path + "/" + filename, 'r', encoding='utf-8')
+    # for filename in filenames:
+    #     original_file = open(path + "/" + filename, 'r', encoding='utf-8')
         
-        rows = original_file.readlines()
+    #     rows = original_file.readlines()
 
-        rows.pop(0)
-        rows.pop(-1)
+    #     rows.pop(0)
+    #     rows.pop(-1)
 
-        for row in rows:
-            i = 0
+    #     for row in rows:
+    #         i = 0
 
-            for element in row:
-                i += 1
-                if element == ":":
-                    i += 1
-                    break
-            values = ast.literal_eval(row[i:])[0]
-            values[0] = values[0].replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
-            values[1] = filename_id_start_to_end["\t"+ str(values[1])]
+    #         for element in row:
+    #             i += 1
+    #             if element == ":":
+    #                 i += 1
+    #                 break
+    #         values = ast.literal_eval(row[i:])[0]
+    #         values[0] = values[0].replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
+    #         values[1] = filename_id_start_to_end["\t"+ str(values[1])]
 
-            revised_row = row[:i]
-            revised_row += '["' + values[0] + '", '
-            revised_row += str(values[1]) + ', '
-            revised_row += '"' + values[2] + '"],\n'
+    #         revised_row = row[:i]
+    #         revised_row += '["' + values[0] + '", '
+    #         revised_row += str(values[1]) + ', '
+    #         revised_row += '"' + values[2] + '"],\n'
 
-            revised_file.write(revised_row)
+    #         revised_file.write(revised_row)
 
-        original_file.close()
+    #     original_file.close()
     
-    revised_file.write("}")
+    # revised_file.write("}")
