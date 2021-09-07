@@ -35,11 +35,11 @@ def insert_user(connection, u_id, username):
     connection.commit()
 
 # def insert_question(connection, q_id, title, num_of_answers, category, rating, u_id):
-def insert_question(connection, q_id, title, num_of_answers, category, rating, u_id, link):
+def insert_question(connection, q_id, title, questiontext, num_of_answers, category, rating, u_id, link):
     insert_statement = """
     INSERT INTO questions VALUES\n
     """
-    insert_statement += "({}, {}, {}, {}, {}, {}, {})\n".format(q_id, title, num_of_answers, category, rating, u_id, link)
+    insert_statement += "({}, {}, {}, {}, {}, {}, {}, {})\n".format(q_id, title, questiontext, num_of_answers, category, rating, u_id, link)
     execute_query(connection, insert_statement)
 
     connection.commit()

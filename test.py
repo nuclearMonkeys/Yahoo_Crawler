@@ -90,7 +90,7 @@ if __name__ == '__main__':
     # new q_ids_/a_ids
 
     ########################################################################
-    path = "./js_dictionaries/answers"
+    path = "./js_dictionaries/questions"
 
     filename_id_start_to_end = dict()
 
@@ -132,7 +132,7 @@ if __name__ == '__main__':
     # The section that revises the q_ids/a_ids
 
     ########################################################################
-    revised_file = open("./js_dictionaries/answers/answers.js", 'w')
+    revised_file = open("./js_dictionaries/questions/questions.js", 'w')
     revised_file.write("var questions_dict = {\n")
 
     for filename in filenames:
