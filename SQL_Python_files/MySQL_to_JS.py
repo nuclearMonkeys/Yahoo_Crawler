@@ -99,8 +99,8 @@ if __name__ == '__main__':
 
     questions = dbase.read_query(connection, "SELECT * FROM questions")
     answers = dbase.read_query(connection, "SELECT * FROM answers")
-    # users = dbase.read_query(connection, "SELECT * FROM users")
+    users = dbase.read_query(connection, "SELECT * FROM users")
 
     write_questions("./js_dictionaries/questions/questions", questions)
     write_answers("./js_dictionaries/answers/answers", answers)
-    # write_users("./js_dictionaries/users/users", users)
+    write_users("./js_dictionaries/users/users", users)

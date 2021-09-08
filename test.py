@@ -43,7 +43,7 @@ if __name__ == '__main__':
     ######################################################################
     path = "./js_dictionaries/answers"
 
-    file = open(path + "/answers.js", 'r')
+    file = open(path + "/answers.js", 'r', encoding='utf-8')
 
     rows = file.readlines()
 
@@ -72,7 +72,7 @@ if __name__ == '__main__':
 
     file.close()
 
-    revised_file = open(path + "/questions_to_answers.js", 'w')
+    revised_file = open(path + "/questions_to_answers.js", 'w', encoding='utf-8')
 
     revised_file.write("var questions_answers_dict = {\n")
 
@@ -87,13 +87,13 @@ if __name__ == '__main__':
     revised_file.write("}")
 
     revised_file.close()
-    # print(rows)
+    print(rows)
 
     # The dictionary between old q_ids/a_ids and the
     # new q_ids_/a_ids
 
     ########################################################################
-    # path = "./js_dictionaries/answers"
+    # path = "./js_dictionaries/questions"
 
     # filename_id_start_to_end = dict()
 
@@ -135,8 +135,8 @@ if __name__ == '__main__':
     # The section that revises the q_ids/a_ids
 
     ########################################################################
-    # revised_file = open("./js_dictionaries/answers/answers.js", 'w')
-    # revised_file.write("var answers_dict = {\n")
+    # revised_file = open("./js_dictionaries/questions/questions.js", 'w', encoding='utf-8')
+    # revised_file.write("var questions_dict = {\n")
 
     # for filename in filenames:
     #     original_file = open(path + "/" + filename, 'r', encoding='utf-8')
@@ -180,7 +180,7 @@ if __name__ == '__main__':
 
     # filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
 
-    # revised_file = open(path + "/answers.js", 'w')
+    # revised_file = open(path + "/answers.js", 'w', encoding='utf-8')
     # revised_file.write("var answers_dict = {\n")
 
     # for filename in filenames:
