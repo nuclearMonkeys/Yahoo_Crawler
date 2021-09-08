@@ -41,132 +41,135 @@ if __name__ == '__main__':
     # file.close()
 
     ######################################################################
-    # path = "./js_dictionaries/answers"
+    path = "./js_dictionaries/answers"
 
-    # file = open(path + "/answers.js", 'r')
+    file = open(path + "/answers.js", 'r')
 
-    # rows = file.readlines()
+    rows = file.readlines()
 
-    # rows.pop(0)
-    # rows.pop(-1)
+    rows.pop(0)
+    rows.pop(-1)
 
-    # q_ids_to_a_ids = dict()
+    q_ids_to_a_ids = dict()
 
-    # for row in rows:
-    #     i = 0
+    for row in rows:
+        i = 0
 
-    #     for element in row:
-    #         i += 1
-    #         if element == ":":
-    #             i += 1
-    #             break
-    #     values = ast.literal_eval(row[i:])[0]
+        for element in row:
+            i += 1
+            if element == ":":
+                i += 1
+                break
+        # print(row[i:])
+        values = ast.literal_eval(row[i:])[0]
         
-    #     if values[1] not in q_ids_to_a_ids:
-    #         q_ids_to_a_ids[values[1]] = list()
-    #     current_q_id = int(row[1:i-2])
-    #     q_ids_to_a_ids[values[1]].append(current_q_id)
+        if values[1] not in q_ids_to_a_ids:
+            q_ids_to_a_ids[values[1]] = list()
+        current_q_id = int(row[1:i-2])
+        q_ids_to_a_ids[values[1]].append(current_q_id)
 
-    #     # print(str(values[1]) +  " " + row[1:i-2])
+        # print(str(values[1]) +  " " + row[1:i-2])
 
-    # file.close()
+    file.close()
 
-    # revised_file = open(path + "/questions_to_answers.js", 'w')
+    revised_file = open(path + "/questions_to_answers.js", 'w')
 
-    # revised_file.write("var questions_answers_dict = {\n")
+    revised_file.write("var questions_answers_dict = {\n")
 
-    # for element in q_ids_to_a_ids.items():
-    #     revised_file.write("\t" + str(element[0]) + " : [")
-    #     for a_id in element[1][:-1]:
-    #         revised_file.write(str(a_id) + ", ")
-    #     revised_file.write(str(element[1][-1]) + "],\n")
+    print("what")
 
-    # revised_file.write("}")
+    for element in q_ids_to_a_ids.items():
+        revised_file.write("\t" + str(element[0]) + " : [")
+        for a_id in element[1][:-1]:
+            revised_file.write(str(a_id) + ", ")
+        revised_file.write(str(element[1][-1]) + "],\n")
 
-    # revised_file.close()
+    revised_file.write("}")
+
+    revised_file.close()
     # print(rows)
 
     # The dictionary between old q_ids/a_ids and the
     # new q_ids_/a_ids
 
     ########################################################################
-    path = "./js_dictionaries/questions"
+    # path = "./js_dictionaries/answers"
 
-    filename_id_start_to_end = dict()
+    # filename_id_start_to_end = dict()
 
-    filenames = os.listdir(path)
+    # filenames = os.listdir(path)
 
-    filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
+    # filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
 
-    current_file_index = 1 # This isn't 0 based
+    # current_file_index = 1 # This isn't 0 based
 
-    i = 0
+    # i = 0
 
-    for filename in filenames:
-        file = open(path + "/" + filename, 'r', encoding='utf-8')
+    # for filename in filenames:
+    #     file = open(path + "/" + filename, 'r', encoding='utf-8')
 
-        rows = file.readlines()
+    #     rows = file.readlines()
 
-        rows.pop(0)
-        rows.pop(-1)
+    #     rows.pop(0)
+    #     rows.pop(-1)
 
-        for row in rows:
-            id_string = ""
+    #     for row in rows:
+    #         id_string = ""
             
-            for element in row:
-                if (element == ' '):
-                    i += 1
-                    # id_string = id_string[1:]
-                    filename_id_start_to_end[id_string] = i
-                    break
-                else:
-                    id_string += element
+    #         for element in row:
+    #             if (element == ' '):
+    #                 i += 1
+    #                 # id_string = id_string[1:]
+    #                 filename_id_start_to_end[id_string] = i
+    #                 break
+    #             else:
+    #                 id_string += element
 
-                current_file_index += 1
+    #             current_file_index += 1
 
-            print(row)
+    #         print(row)
 
-        file.close()
+    #     file.close()
     ########################################################################
 
     # The section that revises the q_ids/a_ids
 
     ########################################################################
-    revised_file = open("./js_dictionaries/questions/questions.js", 'w')
-    revised_file.write("var questions_dict = {\n")
+    # revised_file = open("./js_dictionaries/answers/answers.js", 'w')
+    # revised_file.write("var answers_dict = {\n")
 
-    for filename in filenames:
-        original_file = open(path + "/" + filename, 'r', encoding='utf-8')
-        rows = original_file.readlines()
-        rows.pop(0)
-        rows.pop(-1)
-        original_file.close()
+    # for filename in filenames:
+    #     original_file = open(path + "/" + filename, 'r', encoding='utf-8')
+    #     rows = original_file.readlines()
+    #     rows.pop(0)
+    #     rows.pop(-1)
+    #     original_file.close()
 
-        # print(rows)
+    #     # print(rows)
         
 
-        for row in rows:
-            id_string = ""
+    #     for row in rows:
+    #         id_string = ""
 
-            for element in row:
-                if (element == ' '):
-                    break
-                else:
-                    id_string += element
+    #         for element in row:
+    #             if (element == ' '):
+    #                 break
+    #             else:
+    #                 id_string += element
 
-            revised_row = row
+    #         revised_row = row
 
-            # revised_id_string = '"' + id_string + '"'
-            revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
+    #         # revised_id_string = '"' + id_string + '"'
+    #         revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
 
-            # if (row == rows[-1]):
-            #     revised_row = revised_row[:-2]
+    #         # if (row == rows[-1]):
+    #         #     revised_row = revised_row[:-2]
 
-            revised_file.write(revised_row)
+    #         revised_file.write(revised_row)
 
-    revised_file.write("\n}")
+    # revised_file.write("\n}")
 
-    revised_file.close()
+    # revised_file.close()
     #######################################################################
 
     # Transition to answers
