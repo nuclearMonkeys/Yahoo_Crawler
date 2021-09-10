@@ -98,9 +98,9 @@ if __name__ == '__main__':
     connection = dbase.connect_to_database("localhost", "root", "", "yahoo_answers_archive")
 
     questions = dbase.read_query(connection, "SELECT * FROM questions")
-    answers = dbase.read_query(connection, "SELECT * FROM answers")
-    users = dbase.read_query(connection, "SELECT * FROM users")
+    # answers = dbase.read_query(connection, "SELECT * FROM answers")
+    # users = dbase.read_query(connection, "SELECT * FROM users")
 
     write_questions("./js_dictionaries/questions/questions", questions)
-    write_answers("./js_dictionaries/answers/answers", answers)
-    write_users("./js_dictionaries/users/users", users)
+    # write_answers("./js_dictionaries/answers/answers", answers)
+    # write_users("./js_dictionaries/users/users", users)

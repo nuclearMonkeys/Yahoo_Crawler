@@ -19776,5 +19776,6 @@ var questions_dict = {
 	19775 : ["en mi perfil 360 aparece oculto como lo puedo quitar 10 puntos??", None, 0, "None", 0, "None"],
 	19776 : ["hay juegos gratis para el celular lg chine gratis 10 puntos_???", None, 0, "None", 0, "None"],
 	19777 : ["donde puedo ver mi historial en youtube¿¿ o si alguien sabe sobre los videos de lo que los ojos no ven?? 10 pt", None, 0, "None", 0, "None"],
-
 }
+
+var questions_dict_JSON = JSON.stringify(questions_dict)
