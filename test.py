@@ -8,6 +8,13 @@ import ast # This is for the user of literal eval
 # changes to the q_id and a_ids. Sections will frequently be
 # commented and uncommented
 
+def complex_encode(object):
+    # check using isinstance method
+    if isinstance(object, complex):
+        return [object.real, object.imag]
+    # raised error using exception handling if object is not complex
+    raise TypeError(repr(object) + " is not JSON serialized")
+
 if __name__ == '__main__':
     pass
 
@@ -93,84 +100,84 @@ if __name__ == '__main__':
     # new q_ids_/a_ids
 
     ########################################################################
-    path = "./js_dictionaries/questions"
+    # path = "./js_dictionaries/questions"
 
-    filename_id_start_to_end = dict()
+    # filename_id_start_to_end = dict()
 
-    filenames = os.listdir(path)
+    # filenames = os.listdir(path)
 
-    filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
+    # filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
 
-    current_file_index = 1 # This isn't 0 based
+    # current_file_index = 1 # This isn't 0 based
 
-    i = 0
+    # i = 0
 
-    for filename in filenames:
-        file = open(path + "/" + filename, 'r', encoding='utf-8')
+    # for filename in filenames:
+    #     file = open(path + "/" + filename, 'r', encoding='utf-8')
 
-        rows = file.readlines()
+    #     rows = file.readlines()
 
-        rows.pop(0)
-        rows.pop(-1)
+    #     rows.pop(0)
+    #     rows.pop(-1)
 
-        for row in rows:
-            id_string = ""
+    #     for row in rows:
+    #         id_string = ""
             
-            for element in row:
-                if (element == ' '):
-                    i += 1
-                    # id_string = id_string[1:]
-                    filename_id_start_to_end[id_string] = i
-                    # print(id_string)
-                    break
-                else:
-                    id_string += element
+    #         for element in row:
+    #             if (element == ' '):
+    #                 i += 1
+    #                 # id_string = id_string[1:]
+    #                 filename_id_start_to_end[id_string] = i
+    #                 # print(id_string)
+    #                 break
+    #             else:
+    #                 id_string += element
 
-                current_file_index += 1
+    #             current_file_index += 1
 
-            # print(row)
+    #         # print(row)
 
-        file.close()
+    #     file.close()
     ########################################################################
 
     # The section that revises the q_ids/a_ids
 
     ########################################################################
-    revised_file = open("./Search_Engine_files/questions_JSON/questions.json", 'w', encoding='utf-8')
-    revised_file.write("{\n")
+    # revised_file = open("./js_dictionaries/questions/questions.js", 'w')
+    # revised_file.write("var questions_dict = {\n")
 
-    for filename in filenames:
-        original_file = open(path + "/" + filename, 'r', encoding='utf-8')
-        rows = original_file.readlines()
-        rows.pop(0)
-        rows.pop(-1)
-        original_file.close()
+    # for filename in filenames:
+    #     original_file = open(path + "/" + filename, 'r')
+    #     rows = original_file.readlines()
+    #     rows.pop(0)
+    #     rows.pop(-1)
+    #     original_file.close()
 
-        # print(rows)
+    #     # print(rows)
         
 
-        for row in rows:
-            id_string = ""
+    #     for row in rows:
+    #         id_string = ""
 
-            for element in row:
-                if (element == ' '):
-                    break
-                else:
-                    id_string += element
+    #         for element in row:
+    #             if (element == ' '):
+    #                 break
+    #             else:
+    #                 id_string += element
 
-            revised_row = row
+    #         revised_row = row
 
-            # revised_id_string = '"' + id_string + '"'
-            revised_row = revised_row.replace(id_string, '\t"' + str(filename_id_start_to_end[id_string]) + '"')
+    #         # revised_id_string = '"' + id_string + '"'
+    #         revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
 
-            # if (row == rows[-1]):
-            #     revised_row = revised_row[:-2]
+    #         # if (row == rows[-1]):
+    #         #     revised_row = revised_row[:-2]
 
-            revised_file.write(revised_row)
+    #         revised_file.write(revised_row)
 
-    revised_file.write("\n}")
+    # revised_file.write("\n}")
 
-    revised_file.close()
+    # revised_file.close()
     #######################################################################
 
     # Transition to answers
@@ -216,11 +223,51 @@ if __name__ == '__main__':
     # revised_file.write("}")
 
     #######################################################################
+    path = "./js_dictionaries/questions"
 
-    # file = "./js_dictionaries/questions/questions.js"
+    file = open(path + "/questions.js", 'r')
 
-    # json_obj = json.dumps()
+    rows = file.readlines()
 
-    # revised_file = open("./Search_engine_files/questions_JSON/questions.json", "a", encoding="utf-8")
+    rows.pop(0)
+    rows.pop(-1)
 
-    # revised
+    revised_file = open(path + "/questions_0.js", 'w')
+
+    revised_file.write("var questions_dict = {\n")
+
+    for row in rows:
+        i = 0
+
+        for element in row:
+            i += 1
+            if element == ":":
+                i += 1
+                break
+
+        try:
+            values = ast.literal_eval(row[i:])[0]
+            values[0].replace("’", "'").replace("\n", "\\n").replace('"', '\"')
+            if values[1] == None:
+                values[1] = "None"
+
+            revised_file.write(row[:i])
+            revised_file.write("[")
+            for value in values[:-1]:
+                if type(value) == str:
+                    revised_file.write('"' + str(value) + '\", ')
+                else:
+                    revised_file.write(str(value) + ", ")
+            revised_file.write('"' + values[-1] + '"],\n')
+            # revised_file.write(row[:i] + json.dumps(values, default = 'utf-8') + ",\n")
+            # print(repr(json.dumps(values, default = complex_encode) + ",\n"))
+
+        except:
+            print("err")
+
+    
+
+    revised_file.write("}")
+
+    file.close()
+    revised_file.close()
