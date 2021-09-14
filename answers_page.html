@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang='en' dir='ltr'>
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="answers.css">
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -19,12 +20,12 @@
 
     var results = document.getElementById("question-answers");
 
-    let row1 = `<header class="w3-container">
-                    <h1>${questionObject[0]}</h1>
-                    <p>Question by ${users_dict[questionObject[4]]}</p>
-                </header>`;
+    // let row1 = `<header class="w3-container">
+    //                 <h1>${questionObject[0]}</h1>
+    //                 <p>Question by ${users_dict[questionObject[4]]}</p>
+    //             </header>`;
 
-    results.innerHTML += row1;
+    // results.innerHTML += row1;
 
     for (var ans = 0; ans < answersList.length; ans++)
     {
@@ -32,14 +33,15 @@
         var answer = answers_dict[ansnum];
         var user_name = users_dict[answers_dict[ansnum][2]];
         
-        if (user_name == "None" || user_name == undefined) 
+        if (user_name == "None" || user_name == "undefined") 
         {
             user_name = "Anonymous"
         }
 
-        let row2 = `<div class="answer w3-container w3-center" id="answer-${ansnum}">
+        let row2 = `<div class="answer w3-container w3-center w3-animate-left" id="answer-${ansnum}">
                     <div class="description" id="description-${ansnum}">
                         <p id="answer-description">${answer[0]}</p>
+                        <br></br>
                     </div>
                     <div class="num-of-likes" id="answers-likes-${ansnum}">
                         <p>By ${user_name}</p>
