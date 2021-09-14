@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang='en' dir='ltr'>
     <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="answers.css">
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -15,9 +14,8 @@
     </body>
 
 <script>
-    // JSON.parse
-    var questionObject = sessionStorage.getItem("questionObject");
-    var answersList = sessionStorage.getItem("answersList");
+    var questionObject = JSON.parse(sessionStorage.getItem("questionObject"));
+    var answersList = JSON.parse(sessionStorage.getItem("answersList"));
 
     var results = document.getElementById("question-answers");
 
@@ -39,10 +37,9 @@
             user_name = "Anonymous"
         }
 
-        let row2 = `<div class="answer w3-container w3-center w3-animate-left" id="answer-${ansnum}">
+        let row2 = `<div class="answer w3-container w3-center" id="answer-${ansnum}">
                     <div class="description" id="description-${ansnum}">
                         <p id="answer-description">${answer[0]}</p>
-                        <br></br>
                     </div>
                     <div class="num-of-likes" id="answers-likes-${ansnum}">
                         <p>By ${user_name}</p>
