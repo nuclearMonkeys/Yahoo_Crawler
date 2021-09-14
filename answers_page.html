@@ -20,12 +20,12 @@
 
     var results = document.getElementById("question-answers");
 
-    // let row1 = `<header class="w3-container">
-    //                 <h1>${questionObject[0]}</h1>
-    //                 <p>Question by ${users_dict[questionObject[4]]}</p>
-    //             </header>`;
+    let row1 = `<header class="w3-container">
+                    <h1>${questionObject[0]}</h1>
+                    <p>Question by ${users_dict[questionObject[4]]}</p>
+                </header>`;
 
-    // results.innerHTML += row1;
+    results.innerHTML += row1;
 
     for (var ans = 0; ans < answersList.length; ans++)
     {
