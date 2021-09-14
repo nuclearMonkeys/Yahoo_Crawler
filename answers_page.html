@@ -15,8 +15,9 @@
     </body>
 
 <script>
-    var questionObject = JSON.parse(sessionStorage.getItem("questionObject"));
-    var answersList = JSON.parse(sessionStorage.getItem("answersList"));
+    // JSON.parse
+    var questionObject = sessionStorage.getItem("questionObject");
+    var answersList = sessionStorage.getItem("answersList");
 
     var results = document.getElementById("question-answers");
 
@@ -24,9 +25,6 @@
                     <h1>${questionObject[0]}</h1>
                     <p>Question by ${users_dict[questionObject[4]]}</p>
                 </header>`;
-    
-    // Answers page seems to be taking too long to load and doesn't show
-    // the questions object I want. Might be loading the wrong thing?
 
     results.innerHTML += row1;
 
@@ -36,7 +34,7 @@
         var answer = answers_dict[ansnum];
         var user_name = users_dict[answers_dict[ansnum][2]];
         
-        if (user_name == "None") 
+        if (user_name == "None" || user_name == undefined) 
         {
             user_name = "Anonymous"
         }
