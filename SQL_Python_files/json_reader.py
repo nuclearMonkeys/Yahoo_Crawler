@@ -44,7 +44,7 @@ if __name__ == '__main__':
                     print("q_id: {}".format(obj['q_id']))
                     dbase.insert_question(connection, obj['q_id'], \
                         "'{}'".format(obj['title']), \
-                        "None" if len(obj['questiontext']) <= 0 else "'{}'".format(obj['questiontext']), \
+                        "None" if obj['questiontext'] == "" else "'{}'".format(obj['questiontext']), \
                         "0" if obj['numofanswers'] == None else "'{}'".format(obj['numofanswers'].split()[0]), \
                         "'{}'".format(obj['category']), \
                         "'{}'".format(obj['upvotes']), \
