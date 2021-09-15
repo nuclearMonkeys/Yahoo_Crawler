@@ -214,7 +214,8 @@ if __name__ == '__main__':
             revised_row = row[:i]
             revised_row += '["' + values[0] + '", '
             revised_row += str(values[1]) + ', '
-            revised_row += '"' + values[2] + '"],\n'
+            revised_row += '"' + values[2] + ', '
+            revised_row += str(values[3]) + '],\n'
 
             revised_file.write(revised_row)
 
