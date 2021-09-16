@@ -20,14 +20,17 @@
 
     var results = document.getElementById("question-answers");
 
+    let fullrow = ``;
+
     let row1 = `<header class="w3-container">
                     <h1>${questionObject[0]}</h1>
                     <p>Question by ${users_dict[questionObject[4]]}</p>
                 </header>`;
 
-    results.innerHTML += row1;
+    fullrow += row1;
 
-    for (var ans = 0; ans < answersList.length; ans++)
+    var length = answersList.length;
+    for (var ans = 0; ans < length; ans++)
     {
         var ansnum = answersList[ans];
         var answer = answers_dict[ansnum];
@@ -45,11 +48,13 @@
                     </div>
                     <div class="num-of-likes" id="answers-likes-${ansnum}">
                         <p>By ${user_name}</p>
-                        <p>LIKES: ${answer[1]}</p>
+                        <p>LIKES: ${answer[3]}</p>
                     </div>
                 </div>`;
 
-        results.innerHTML += row2;
+        fullrow += row2;
     }
+
+    results.innerHTML += fullrow;
 
 </script>
