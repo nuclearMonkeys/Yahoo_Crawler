@@ -8,6 +8,17 @@
 <script>
     var questionObject = JSON.parse(sessionStorage.getItem("questionObject"));
     var answersList = JSON.parse(sessionStorage.getItem("answersList"));
-    console.log(questionObject);
-    console.log(answersList);
+    //console.log(questionObject);
+    //console.log(answersList);
+
+    var length = answersList.length;
+    for (var ans = 0; ans < length; ans++)
+    {
+        var ansnum = answersList[ans];
+        var answer = answers_dict[ansnum];
+        var user_name = users_dict[answers_dict[ansnum][2]];
+        console.log(answer);
+        console.log(user_name);
+    }
+
 </script>
