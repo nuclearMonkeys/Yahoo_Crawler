@@ -113,7 +113,7 @@ if __name__ == '__main__':
     i = 0
 
     for filename in filenames:
-        file = open(path + "/" + filename, 'r')
+        file = open(path + "/" + filename, 'r', encoding='utf-8')
 
         rows = file.readlines()
 
@@ -143,11 +143,11 @@ if __name__ == '__main__':
     # The section that revises the q_ids/a_ids
 
     ########################################################################
-    revised_file = open("./js_dictionaries/questions/questions.js", 'w')
+    revised_file = open("./js_dictionaries/questions/questions.js", 'w', encoding='utf-8')
     revised_file.write("var questions_dict = {\n")
 
     for filename in filenames:
-        original_file = open(path + "/" + filename, 'r')
+        original_file = open(path + "/" + filename, 'r', encoding='utf-8')
         rows = original_file.readlines()
         rows.pop(0)
         rows.pop(-1)
@@ -214,7 +214,7 @@ if __name__ == '__main__':
             revised_row = row[:i]
             revised_row += '["' + values[0] + '", '
             revised_row += str(values[1]) + ', '
-            revised_row += '"' + values[2] + ', '
+            revised_row += '"' + values[2] + '", '
             revised_row += str(values[3]) + '],\n'
 
             revised_file.write(revised_row)

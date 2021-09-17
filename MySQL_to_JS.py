@@ -55,7 +55,7 @@ def write_answers(filename, answers):
             for element in answer[1:4]:
                 if isinstance(element, str):
                     element = element.replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
-                    answer_string += '"' + element + '"' + ", "
+                    answer_string += '"' + element + '", '
                 else:
                     answer_string += str(element) + ", "
             answer_string += str(answer[4]) + "],\n"
