@@ -100,128 +100,142 @@ if __name__ == '__main__':
     # new q_ids_/a_ids
 
     ########################################################################
-    path = "./js_dictionaries/questions"
+    # path = "./js_dictionaries/questions"
 
-    filename_id_start_to_end = dict()
+    # filename_id_start_to_end = dict()
 
-    filenames = os.listdir(path)
+    # # filenames = os.listdir(path)
 
-    filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
+    # # filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
 
-    current_file_index = 1 # This isn't 0 based
+    # current_file_index = 1 # This isn't 0 based
 
-    i = 0
+    # i = 0
 
-    for filename in filenames:
-        file = open(path + "/" + filename, 'r', encoding='utf-8')
+    # file = open("./js_dictionaries/questions.js", 'r', encoding='utf-8')
 
-        rows = file.readlines()
+    # rows = file.readlines()
 
-        rows.pop(0)
-        rows.pop(-1)
+    # rows.pop(0)
+    # rows.pop(-1)
 
-        for row in rows:
-            id_string = ""
-            
-            for element in row:
-                if (element == ' '):
-                    i += 1
-                    # id_string = id_string[1:]
-                    filename_id_start_to_end[id_string] = i
-                    # print(id_string)
-                    break
-                else:
-                    id_string += element
+    # for row in rows:
+    #     id_string = ""
+        
+    #     for element in row:
+    #         if (element == ' '):
+    #             i += 1
+    #             # id_string = id_string[1:]
+    #             filename_id_start_to_end[id_string] = i
+    #             # print(id_string)
+    #             break
+    #         else:
+    #             id_string += element
 
-                current_file_index += 1
+    #         current_file_index += 1
 
-            # print(row)
+    #     # print(row)
 
-        file.close()
+    # file.close()
     ########################################################################
 
     # The section that revises the q_ids/a_ids
 
     ########################################################################
-    revised_file = open("./js_dictionaries/questions/questions.js", 'w', encoding='utf-8')
-    revised_file.write("var questions_dict = {\n")
+    revised_file = open("./js_dictionaries/questions/questions.json", 'w', encoding='utf-8')
 
-    for filename in filenames:
-        original_file = open(path + "/" + filename, 'r', encoding='utf-8')
-        rows = original_file.readlines()
-        rows.pop(0)
-        rows.pop(-1)
-        original_file.close()
+    original_file = open("./js_dictionaries/questions/questions.js", 'r', encoding='utf-8')
 
-        # print(rows)
+    rows = original_file.readlines()
+
+    rows.pop(0)
+    rows.pop(-1)
+
+    original_file.close()
+
+    # print(rows)
+
+
+    for row in rows:
         
+        id_string = ""
+        i = 0
 
-        for row in rows:
-            id_string = ""
+        for element in row:
+            i += 1
+            if element == ":":
+                i += 1
+                break
 
-            for element in row:
-                if (element == ' '):
-                    break
-                else:
-                    id_string += element
+        id_string = row[:i-3]
 
-            revised_row = row
+        values = ast.literal_eval(row[i:])[0]
+        values[0] = values[0].replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
 
-            # revised_id_string = '"' + id_string + '"'
-            revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
+        revised_row = "{"
+        revised_row += '"q_id": {}, '.format(id_string.lstrip())
+        revised_row += '"question_title": "{}", '.format(values[0])
+        revised_row += '"question_text": "{}", '.format(values[1])
+        revised_row += '"num_of_answers": {}, '.format(values[2])
+        revised_row += '"category": "{}", '.format(values[3])
+        revised_row += '"num_of_likes": {}, '.format(values[4])
+        revised_row += '"u_id": "{}"'.format(values[5])
 
-            # if (row == rows[-1]):
-            #     revised_row = revised_row[:-2]
+        # revised_id_string = '"' + id_string + '"'
+        # revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
 
-            revised_file.write(revised_row)
+        # if (row == rows[-1]):
+        #     revised_row = revised_row[:-2]
 
-    revised_file.write("\n}")
+        revised_row += "}\n"
+
+        revised_file.write(revised_row)
 
     revised_file.close()
     #######################################################################
 
     # Transition to answers
     ########################################################################
-    path = "./js_dictionaries/answers"
+    # path = "./js_dictionaries/answers"
 
-    filenames = os.listdir(path)
+    # filenames = os.listdir(path)
 
-    filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
+    # filenames = sorted(filenames, key=lambda x: int(x.partition('_')[2].partition('.')[0]))
 
-    revised_file = open(path + "/answers.js", 'w', encoding='utf-8')
-    revised_file.write("var answers_dict = {\n")
+    # revised_file = open(path + "/answers.js", 'w', encoding='utf-8')
+    # revised_file.write("var answers_dict = {\n")
 
-    for filename in filenames:
-        original_file = open(path + "/" + filename, 'r', encoding='utf-8')
+    # for filename in filenames:
+    #     original_file = open(path + "/" + filename, 'r', encoding='utf-8')
         
-        rows = original_file.readlines()
+    #     rows = original_file.readlines()
 
-        rows.pop(0)
-        rows.pop(-1)
+    #     rows.pop(0)
+    #     rows.pop(-1)
 
-        for row in rows:
-            i = 0
+    #     for row in rows:
+    #         i = 0
 
-            for element in row:
-                i += 1
-                if element == ":":
-                    i += 1
-                    break
-            values = ast.literal_eval(row[i:])[0]
-            values[0] = values[0].replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
-            values[1] = filename_id_start_to_end["\t"+ str(values[1])]
+    #         for element in row:
+    #             i += 1
+    #             if element == ":":
+    #                 i += 1
+    #                 break
+    #         values = ast.literal_eval(row[i:])[0]
+    #         values[0] = values[0].replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
+    #         values[1] = filename_id_start_to_end["\t"+ str(values[1])]
 
-            revised_row = row[:i]
-            revised_row += '["' + values[0] + '", '
-            revised_row += str(values[1]) + ', '
-            revised_row += '"' + values[2] + '", '
-            revised_row += str(values[3]) + '],\n'
+    #         revised_row = row[:i]
+    #         revised_row += '["' + values[0] + '", '
+    #         revised_row += str(values[1]) + ', '
+    #         revised_row += '"' + values[2] + '", '
+    #         revised_row += str(values[3]) + '],\n'
 
-            revised_file.write(revised_row)
+    #         revised_file.write(revised_row)
 
-        original_file.close()
+    #     original_file.close()
     
-    revised_file.write("}")
+    # revised_file.write("}")
 
     #######################################################################
     # path = "./js_dictionaries/questions"
