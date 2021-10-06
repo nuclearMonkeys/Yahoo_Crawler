@@ -175,29 +175,29 @@ if __name__ == '__main__':
         revised_row = "{"
 
         # questions
-        # revised_row += '"q_id": {}, '.format(id_string.lstrip())
-        # revised_row += '"question_title": "{}", '.format(values[0])
-        # revised_row += '"question_text": "{}", '.format(values[1])
-        # revised_row += '"num_of_answers": {}, '.format(values[2])
+        # revised_row += '"qId": {}, '.format(id_string.lstrip())
+        # revised_row += '"questionTitle": "{}", '.format(values[0])
+        # revised_row += '"questionText": "{}", '.format(values[1])
+        # revised_row += '"numOfAnswers": {}, '.format(values[2])
         # revised_row += '"category": "{}", '.format(values[3])
-        # revised_row += '"num_of_likes": {}, '.format(values[4])
-        # revised_row += '"u_id": "{}"'.format(values[5])
+        # revised_row += '"numOfLikes": {}, '.format(values[4])
+        # revised_row += '"uId": "{}"'.format(values[5])
 
         # answers
-        # revised_row += '"a_id": {}, '.format(id_string.lstrip())
+        # revised_row += '"aId": {}, '.format(id_string.lstrip())
         # revised_row += '"answer": "{}", '.format(values[0])
-        # revised_row += '"u_id": "{}", '.format(values[1])
-        # revised_row += '"num_of_likes": {}'.format(values[2])
+        # revised_row += '"uId": "{}", '.format(values[1])
+        # revised_row += '"numOfLikes": {}'.format(values[2])
 
         # user
-        # revised_row += '"u_id": {}, '.format(id_string.lstrip())
+        # revised_row += '"uId": {}, '.format(id_string.lstrip())
         # revised_row += '"username": "{}"'.format(row[i+1:-3])
 
         # questions_to_answers
-        revised_row += '"q_id": {}, '.format(id_string.lstrip())
-        revised_row += '"list_of_ans": {}'.format(row[i:-2])
+        revised_row += '"qId": {}, '.format(id_string.lstrip())
+        revised_row += '"listOfAns": {}'.format(row[i:-2])
 
-        # revised_id_string = '"' + id_string + '"'
+        # revisedIdString = '"' + id_string + '"'
         # revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
 
         # if (row == rows[-1]):
