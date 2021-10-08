@@ -142,9 +142,9 @@ if __name__ == '__main__':
     # The section that revises the q_ids/a_ids
 
     ########################################################################
-    revised_file = open("./js_dictionaries/questions_to_answers.json", 'w', encoding='utf-8')
+    revised_file = open("./js_dictionaries/answers/answers.json", 'w', encoding='utf-8')
 
-    original_file = open("./js_dictionaries/questions_to_answers.js", 'r', encoding='utf-8')
+    original_file = open("./js_dictionaries/answers/answers.js", 'r', encoding='utf-8')
 
     rows = original_file.readlines()
 
@@ -169,8 +169,8 @@ if __name__ == '__main__':
 
         id_string = row[:i-3]
 
-        # values = ast.literal_eval(row[i:])[0]
-        # values[0] = values[0].replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
+        values = ast.literal_eval(row[i:])[0]
+        values[0] = values[0].replace("’", "'").replace("\n", "\\n").replace('"', '\\"')
 
         revised_row = "{"
 
@@ -184,18 +184,19 @@ if __name__ == '__main__':
         # revised_row += '"uId": "{}"'.format(values[5])
 
         # answers
-        # revised_row += '"aId": {}, '.format(id_string.lstrip())
-        # revised_row += '"answer": "{}", '.format(values[0])
-        # revised_row += '"uId": "{}", '.format(values[1])
-        # revised_row += '"numOfLikes": {}'.format(values[2])
+        revised_row += '"aId": {}, '.format(id_string.lstrip())
+        revised_row += '"answer": "{}", '.format(values[0])
+        revised_row += '"qId": {}, '.format(values[1])
+        revised_row += '"uId": "{}", '.format(values[2])
+        revised_row += '"numOfAns": {}'.format(values[3])
 
         # user
         # revised_row += '"uId": {}, '.format(id_string.lstrip())
         # revised_row += '"username": "{}"'.format(row[i+1:-3])
 
         # questions_to_answers
-        revised_row += '"qId": {}, '.format(id_string.lstrip())
-        revised_row += '"listOfAns": {}'.format(row[i:-2])
+        # revised_row += '"qId": {}, '.format(id_string.lstrip())
+        # revised_row += '"listOfAns": {}'.format(row[i:-2])
 
         # revisedIdString = '"' + id_string + '"'
         # revised_row = revised_row.replace(id_string, '\t' + str(filename_id_start_to_end[id_string]))
